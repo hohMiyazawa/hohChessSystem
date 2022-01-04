@@ -1,0 +1,30 @@
+.hohBoard{
+	image-rendering: pixelated;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.hohPiece{
+	position: absolute;
+}
+.hohSquare{
+	position: absolute;
+	width: 64px;
+	height: 64px;
+}
+.hohPieceContainer,
+.hohSquareContainer{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+.hohSquare.selected{
+	border: red;
+	border-style: solid;
+	border-width: 5px;
+	margin-left: -5px;
+	margin-top: -5px;
+}
+.hohFail{
+	margin-left: 520px;
+}
