@@ -764,7 +764,13 @@ const italian = {move: "Bc4",replies:[
 								{move: "Bc5",   freq:   908,book:[]},
 								{move: "Qd4",   freq:   445,book:[{move: "Nc3"}]},
 							]}]},
-							{move: "Bd7", freq:  5194,master:8,book:[{move: "Ba4"}]},
+							{move: "Bd7", freq:  5194,master:8,book:[{move: "Ba4",replies:[
+								{move: "h6",   freq:   3759,book:[{move: "Ne4"}]},
+								{move: "Be7",   freq:  2699,book:[{move: "O-O"}]},
+								{move: "Bd6",   freq:  1337,book:[{move: "d3"}]},
+								{move: "Bc5",   freq:   822,book:[]},
+								{move: "Rc8",   freq:   433,book:[]},
+							]}]},
 							{move: "Be7", freq:  4001,master:148,book:[{move: "Bd3"}]},
 							{move: "h6",  freq:  2612,master:30,book:[{move: "Ne4",stock:0.35}]},
 							{move: "Rb8", freq:  2425,master:151,book:[{move: "Bd3"}]},
@@ -1387,7 +1393,7 @@ const hoh_kingKnight =
 								{move: "Qg5",  freq:  78,book:[{move: "Qxg5#"}]},
 							]}]},
 						]}]},
-						{move: "d5",  freq:  2105,book:[{move: "Bxc5+"}]},
+						{move: "d5",  freq:  2105,book:[{move: "Bxd5+"}]},
 					]}]},
 				]}]},
 			]}]},
@@ -1772,7 +1778,13 @@ const whiteBook = {
 						{move: "c6", freq:    13544,book:[{move: "c3"}]},
 					]}]},//Fransk
 					{move: "c5",  freq:  320756,master:892,book:[{move: "d5",replies:[
-						{move: "exd5", freq:  60286,book:[{move: "exd5"}]},
+						{move: "exd5", freq:  60286,book:[{move: "exd5",replies:[
+							{move: "d6",  freq:  127467,book:[{move: "Nf3",stock:1.01}]},//fransk benoni
+							{move: "Nf6",  freq:  31112,book:[]},
+							{move: "Bd6",  freq:   4676,book:[]},
+							{move: "Qe7+",  freq:  2560,book:[]},
+							{move: "g6",  freq:    1148,book:[]},
+						]}]},
 						{move: "d6", freq:    26939,book:[{move: "Nf3",stock:1.05}]},
 						{move: "Nf6", freq:   14620},
 						{move: "e5", freq:    10542,replies:[{move: "a4"}]}
