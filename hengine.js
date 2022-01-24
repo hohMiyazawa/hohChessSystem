@@ -1,6 +1,6 @@
 let initialBoard = function(){
 	return {
-		pos {
+		pos: [
 2,3,4,5,6,4,3,2,
 1,1,1,1,1,1,1,1,
 0,0,0,0,0,0,0,0,
@@ -10,7 +10,7 @@ let initialBoard = function(){
 9,9,9,9,9,9,9,9,
 10,11,12,13,14,12,11,10
 		],
-		material:{
+		material: {
 			black: [8,2,2,2,1,1],
 			white: [8,2,2,2,1,1]
 		},
@@ -203,6 +203,37 @@ let rawMoveGen = function(board){
 		else if(pos === 14 && !board.isWhite){
 		}
 		else if(pos === 3 || pos === 11){
+			let indices;
+			if(index % 8 === 0){
+				indices = [-15,-6,10,17]
+			}
+			else if(index % 8 === 1){
+				indices = [-17,-15,-6,10,15,17]
+			}
+			else if(index % 8 === 6){
+				indices = [-17,-15,-10,6,15,17]
+			}
+			else if(index % 8 === 7){
+				indices = [-17,-10,6,15]
+			}
+			else{
+				indices = [-17,-15,-10,-6,6,10,15,17]
+			}
+			indices.forEach(ind => {
+				let target = ind + index;
+				if(target >= 0 && target < 64){
+					let piece = board.pos[target];
+					if(!piece){
+						let move = copyNext(board);
+						move.pos[target] = pos;
+						move.pos[index] = 0;
+						move.moveClock++;
+						list.push(move)
+					}
+					else{
+					}
+				}
+			})
 		}
 		else{
 			for(let i = 1;i < 8;i++){
