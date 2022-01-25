@@ -1,6 +1,7 @@
 let hohChess = {
 	board: null,
 	options: null,
+	history: [],
 	init: function(DOMlocation,options){
 		let board = document.createElement("div");
 		board.classList.add("hohBoard");
@@ -74,6 +75,15 @@ let hohChess = {
 			hohChess.render(hohChess.board)
 		};
 
+		hohChess.msg = document.createElement("div");
+		hohChess.msg.innerText = "";
+		board.appendChild(hohChess.msg);
+
+		hohChess.notation = document.createElement("div");
+		hohChess.notation.innerText = "";
+		board.appendChild(hohChess.notation);
+		hohChess.notation.style.width = "500px";
+
 		let globalSelected = -1;
 
 
@@ -85,6 +95,7 @@ let hohChess = {
 	doMove: function(start,end){
 		let moveProposed = copyBoard(hohChess.board);
 		let piece = moveProposed.pos[start];
+		let cap = moveProposed[end];
 		moveProposed.pos[end] = piece;
 		moveProposed.pos[start] = 0;
 		if(piece === 6 && start === 4 && end === 6){
@@ -103,16 +114,24 @@ let hohChess = {
 			moveProposed.pos[59] = 10;
 			moveProposed.pos[56] = 0;
 		}
-		else if(piece === 1 && ((end - start === 7) || (end - start === 9))){
+		else if(piece === 1 && cap === 0 && ((end - start === 7) || (end - start === 9))){
 			moveProposed.pos[end - 8] = 0
 		}
-		else if(piece === 9 && ((end - start === -7) || (end - start === -9))){
+		else if(piece === 9 && cap === 0 && ((end - start === -7) || (end - start === -9))){
 			moveProposed.pos[end + 8] = 0
+		}
+		else if(piece === 1 && end >= 56){
+			moveProposed.pos[end] = 5
+		}
+		else if(piece === 9 && end < 8){
+			moveProposed.pos[end] = 13
 		}
 		let validMoves = moveGen(hohChess.board);
 		//console.log(validMoves,moveProposed);
 		return validMoves.some(move => {
 			if(moveProposed.pos.every((square,index) => move.pos[index] === square)){
+				hohChess.history.push(finalNotation(move,hohChess.board,validMoves));
+				hohChess.notation.innerText = hohChess.history.join(" ");
 				hohChess.board = move;
 				return true
 			}
@@ -145,11 +164,90 @@ let hohChess = {
 		if(hohChess.options.moveList){
 			Array.from(hohChess.moveList.children).forEach(child => child.remove());
 			let moves = moveGen(hohChess.board);
-			moves.forEach(move => {
-				let text = document.createElement("p");
-				text.innerText = finalNotation(move,hohChess.board,moves);
-				hohChess.moveList.appendChild(text)
-			})
+			if(
+				(hohChess.board.isWhite && hohChess.options.score_white)
+				|| (!hohChess.board.isWhite && hohChess.options.score_black)
+			){
+				if(hohChess.board.isWhite && hohChess.options.autoplay_white){
+					hohChess.msg.innerText = "thinking..."
+				}
+				else{
+					hohChess.msg.innerText = ""
+				}
+				if(hohChess.board.isWhite && hohChess.options.autoplay_whiteBook && hohChess.options.autoplay_white){
+					let openingMove;
+					let found = true;
+					let root = hohChess.options.whiteBook.book[0];
+					for(let i=1;i<hohChess.history.length;i+=2){
+						if(root.replies && root.replies.length){
+							for(let j=0;j<root.replies.length;j++){
+								if(root.replies[j].move === hohChess.history[i]){
+									if(root.replies[j].book && root.replies[j].book.length){
+										root = root.replies[j].book[0]
+									}
+									break
+								}
+							}
+						}
+						else{
+							found = false
+						}
+					}
+					if(found){
+						openingMove = notationDec(root.move,hohChess.board)
+					}
+					if(openingMove){
+						hohChess.history.push(finalNotation(openingMove,hohChess.board,moves));
+						hohChess.board = openingMove;
+						hohChess.render(hohChess.board);
+						hohChess.notation.innerText = hohChess.history.join(" ")
+						return
+					}
+				}
+				moves.forEach(move => {
+					move.eng = score(move,hohChess.options.depth)
+				});
+				if(hohChess.board.isWhite){
+					moves.sort((b,a) => a.eng - b.eng)
+				}
+				else{
+					moves.sort((a,b) => a.eng - b.eng)
+				}
+				moves.forEach(move => {
+					let text = document.createElement("p");
+					text.innerText = finalNotation(move,hohChess.board,moves);
+					if(move.eng === 0){
+						text.innerText += " | 0.00"
+					}
+					else if(move.eng > 0){
+						text.innerText += " | +" + move.eng
+					}
+					else{
+						text.innerText += " | " + move.eng
+					}
+					hohChess.moveList.appendChild(text)
+				})
+				if(hohChess.board.isWhite && hohChess.options.autoplay_white){
+					hohChess.history.push(finalNotation(moves[0],hohChess.board,moves));
+					hohChess.notation.innerText = hohChess.history.join(" ")
+					hohChess.board = moves[0];
+					hohChess.render(hohChess.board)
+				}
+				else if(!hohChess.board.isWhite && hohChess.options.autoplay_black){
+					hohChess.history.push(finalNotation(moves[0],hohChess.board,moves));
+					hohChess.notation.innerText = hohChess.history.join(" ")
+					hohChess.board = moves[0];
+					hohChess.render(hohChess.board)
+				}
+			}
+			else{
+				moves.forEach(move => {
+					let text = document.createElement("p");
+					text.innerText = finalNotation(move,hohChess.board,moves);
+					hohChess.moveList.appendChild(text)
+				})
+			}
 		}
+		hohChess.msg.innerText = ""
 	}
 }

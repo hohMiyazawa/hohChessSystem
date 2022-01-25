@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<script src="whitebook.js"></script>
+		<script src="blackbook.js"></script>
 		<script src="hengine.js"></script>
 		<script src="hohChess2.js"></script>
 		<link rel="stylesheet" type="text/css" href="hohChess.css">
@@ -18,11 +19,19 @@
 		<script>
 const boardLocation = document.getElementById("game");
 hohChess.init(boardLocation,{
-	flip: false,
+	flip: true,
 	mode: "openingDrill",
 	isWhite: true,
 	book: whiteBook,
-	moveList: true
+	moveList: true,
+	score_white: true,
+	score_black: false,
+	autoplay_black: false,
+	autoplay_white: true,
+	whiteBook: whiteBook,
+	blackBook: blackBook,
+	autoplay_whiteBook: true,
+	depth: 4
 });
 		</script>
 	</body>

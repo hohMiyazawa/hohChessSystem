@@ -33,7 +33,8 @@ let initialBoard = function(){
 			black: {oo: true,ooo:true},
 			white: {oo: true,ooo:true},
 		},
-		isWhite: true
+		isWhite: true,
+		capture: false
 	}
 }
 
@@ -52,7 +53,8 @@ let copyBoard = function(board){
 			black: {oo: board.castle.black.oo, ooo: board.castle.black.ooo},
 			white: {oo: board.castle.white.oo, ooo: board.castle.white.ooo},
 		},
-		isWhite: board.isWhite
+		isWhite: board.isWhite,
+		capture: board.capture
 	}
 }
 
@@ -71,7 +73,8 @@ let copyNext = function(board){
 			black: {oo: board.castle.black.oo, ooo: board.castle.black.ooo},
 			white: {oo: board.castle.white.oo, ooo: board.castle.white.ooo},
 		},
-		isWhite: !board.isWhite
+		isWhite: !board.isWhite,
+		capture: false
 	}
 }
 
@@ -151,7 +154,11 @@ let createNotation = function(start,end){
 			if(end.pos[i] && end.pos[i] !== start.pos[i]){
 				target = i
 			}
-			else if(start.pos[i] && !end.pos[i] && player && ((start.pos[i] < 8 && player) || (start.pos[i] > 8 && !player))){
+			else if(
+				start.pos[i]
+				&& !end.pos[i]
+				&& ((start.pos[i] < 8 && player) || (start.pos[i] > 8 && !player))
+			){
 				source = i
 			}
 		}
@@ -162,7 +169,14 @@ let createNotation = function(start,end){
 		notation.endRank = Math.floor(target / 8) + 1
 	}
 	if(isCheck(end,!player)){
-		notation.check = true
+		let opponentMoves = moveGen(end);
+		if(opponentMoves.length){
+			notation.check = true
+		}
+		else{
+			notation.mate = true
+		}
+		
 	};
 	if(
 		(start.material.black.reduce((acc,val) => acc + val,0) > end.material.black.reduce((acc,val) => acc + val,0))
@@ -180,7 +194,7 @@ let finalNotation = function(move,orig,moveList){
 		let notList = moveList.map(move => createNotation(orig,move));
 		let idenList = notList.filter(move => move.text === myMove.text && move.endFile === myMove.endFile && move.endRank === myMove.endRank);
 		if(idenList.length > 1){
-			
+			text += myMove.startFile + myMove.startRank
 		}
 	}
 	if(myMove.capture){
@@ -189,13 +203,233 @@ let finalNotation = function(move,orig,moveList){
 		}
 		text += "x"
 	}
-	text += myMove.endFile + myMove.endRank;
+	if(text !== "O-O" && text !== "O-O-O"){
+		text += myMove.endFile + myMove.endRank
+	}
+	if(myMove.check){
+		text += "+"
+	}
+	if(myMove.mate){
+		text += "#"
+	}
 	return text
 }
+
+let mobility = function(board,isWhite){
+	let count = 0;
+	board.pos.forEach((pos,index) => {
+		if(
+			pos === 0
+			|| (isWhite && pos > 8)
+			|| (!isWhite && pos < 8)
+		){
+			return
+		}
+		else if(pos === 1){//white pawn
+			let front = board.pos[index + 8];
+			if(!front){
+				if(index < 16){//start square
+					if(!board.pos[index + 16]){
+						count++
+					}
+				}
+				if(index >= 48){//promotions
+					count += 4
+				}
+				else{
+					count++
+				}
+			}
+			if(index % 8 !== 0){
+				let left = board.pos[index + 8 - 1];
+				if(left > 8){
+					if(index >= 48){//promotions
+						count += 4
+					}
+					else{
+						count++
+					}
+				}
+			}
+			if(index % 8 !== 7){
+				let right = board.pos[index + 8 + 1];
+				if(right > 8){
+					if(index >= 48){//promotions
+						count += 4
+					}
+					else{
+						count++
+					}
+				}
+			}
+		}
+		else if(pos === 9){//black pawn
+			let front = board.pos[index - 8];
+			if(!front){
+				if(index > 47){//start square
+					if(!board.pos[index - 16]){
+						count++
+					}
+				}
+				if(index < 16){//promotions
+					count += 4
+				}
+				else{
+					count++
+				}
+			}
+			if(index % 8 !== 0){
+				let left = board.pos[index - 8 - 1];
+				if(left && left < 8){
+					if(index < 16){//promotions
+						count += 4
+					}
+					else{
+						count++
+					}
+				}
+			}
+			if(index % 8 !== 7){
+				let right = board.pos[index - 8 + 1];
+				if(right && right < 8){
+					if(index < 16){//promotions
+						count += 4
+					}
+					else{
+						count++
+					}
+				}
+			}
+		}
+		else if(pos === 3 || pos === 11){
+			let indices;
+			if(index % 8 === 0){
+				indices = [-15,-6,10,17]
+			}
+			else if(index % 8 === 1){
+				indices = [-17,-15,-6,10,15,17]
+			}
+			else if(index % 8 === 6){
+				indices = [-17,-15,-10,6,15,17]
+			}
+			else if(index % 8 === 7){
+				indices = [-17,-10,6,15]
+			}
+			else{
+				indices = [-17,-15,-10,-6,6,10,15,17]
+			}
+			indices.forEach(ind => {
+				let target = ind + index;
+				if(target >= 0 && target < 64){
+					let piece = board.pos[target];
+					if(!piece){
+						count++
+					}
+					else if(piece < 8 && !isWhite){
+						count++
+					}
+					else if(piece > 8 && isWhite){
+						count++
+					}
+				}
+			})
+		}
+		else{
+			let offsets = [];
+			if(pos === 6 || pos === 14 || pos === 2 || pos === 10 || pos === 5 || pos === 13){
+				offsets.push([0,-1],[-1,0],[1,0],[0,1])
+			}
+			if(pos === 6 || pos === 14 || pos === 4 || pos === 12 || pos === 5 || pos === 13){
+				offsets.push([-1,-1],[1,-1],[-1,1],[1,1])
+			}
+			offsets.forEach(pair => {
+				for(let i = 1;i < 8;i++){
+					let target = index + i*pair[0] + i*pair[1]*8;
+					if(
+						((index % 8) + i*pair[0] < 0)
+						|| ((index % 8) + i*pair[0] > 7)
+						|| (target < 0)
+						|| (target > 63)
+						|| (i > 1 && (pos === 6 || pos === 14))
+					){
+						break
+					}
+					let piece = board.pos[target];
+					if(!piece){//move
+						count++
+					}
+					else{//capture
+						if((piece < 8 && isWhite) || (piece > 8 && !isWhite)){
+							break
+						}
+						count++
+						break
+					}
+				}
+			})
+		}
+	});
+	return count
+}
+
 
 
 let rawMoveGen = function(board){
 	let list = [];
+	if(board.enPassantFile){
+		if(board.isWhite){
+			if(board.enPassantFile !== 1){
+				if(board.pos[board.enPassantFile + 32 - 2] === 1){
+					let move = copyNext(board);
+					move.pos[board.enPassantFile + 32 - 2 + 9] = 1;
+					move.pos[board.enPassantFile + 32 - 2]     = 0;
+					move.pos[board.enPassantFile + 32 - 2 + 1] = 0;
+					move.moveClock = 0;
+					move.material.black[0]--;
+					move.capture = true;
+					list.push(move)
+				}
+			}
+			if(board.enPassantFile !== 8){
+				if(board.pos[board.enPassantFile + 32] === 1){
+					let move = copyNext(board);
+					move.pos[board.enPassantFile + 32 + 9] = 1;
+					move.pos[board.enPassantFile + 32]     = 0;
+					move.pos[board.enPassantFile + 32 + 1] = 0;
+					move.moveClock = 0;
+					move.material.black[0]--;
+					move.capture = true;
+					list.push(move)
+				}
+			}
+		}
+		else{
+			if(board.enPassantFile !== 1){
+				if(board.pos[board.enPassantFile + 24 - 2] === 9){
+					let move = copyNext(board);
+					move.pos[board.enPassantFile + 24 - 7] = 9;
+					move.pos[board.enPassantFile + 24 - 2]     = 0;
+					move.pos[board.enPassantFile + 24 + 1] = 0;
+					move.moveClock = 0;
+					move.material.white[0]--;
+					move.capture = true;
+					list.push(move)
+				}
+			}
+			if(board.enPassantFile !== 8){
+				if(board.pos[board.enPassantFile + 24] === 9){
+					let move = copyNext(board);
+					move.pos[board.enPassantFile + 24 - 2 - 7] = 9;
+					move.pos[board.enPassantFile + 24]     = 0;
+					move.pos[board.enPassantFile + 24 - 2 + 1] = 0;
+					move.moveClock = 0;
+					move.material.white[0]--;
+					move.capture = true;
+					list.push(move)
+				}
+			}
+		}
+	};
 	board.pos.forEach((pos,index) => {
 		if(
 			pos === 0
@@ -251,6 +485,7 @@ let rawMoveGen = function(board){
 					move.pos[index] = 0;
 					move.moveClock = 0;
 					move.material.black[code_to_materialIndex[left]]--;
+					move.capture = true;
 					if(index >= 48){//promotions
 						let queenPromotion = copyBoard(move);
 						let rookPromotion = copyBoard(move);
@@ -282,6 +517,7 @@ let rawMoveGen = function(board){
 					move.pos[index] = 0;
 					move.moveClock = 0;
 					move.material.black[code_to_materialIndex[right]]--;
+					move.capture = true;
 					if(index >= 48){//promotions
 						let queenPromotion = copyBoard(move);
 						let rookPromotion = copyBoard(move);
@@ -303,26 +539,6 @@ let rawMoveGen = function(board){
 					else{
 						list.push(move)
 					}
-				}
-			}
-			if(board.enPassantFile){
-				if(index - 32 === board.enPassantFile){
-					let move = copyNext(board);
-					move.pos[index + 8 - 1] = 1;
-					move.pos[index - 1] = 0;
-					move.pos[index] = 0;
-					move.moveClock = 0;
-					move.material.black[0]--;
-					list.push(move)
-				}
-				else if(index - 30 === board.enPassantFile){
-					let move = copyNext(board);
-					move.pos[index + 8 + 1] = 1;
-					move.pos[index + 1] = 0;
-					move.pos[index] = 0;
-					move.moveClock = 0;
-					move.material.black[0]--;
-					list.push(move)
 				}
 			}
 		}
@@ -372,7 +588,8 @@ let rawMoveGen = function(board){
 					move.pos[index - 8 - 1] = 9;
 					move.pos[index] = 0;
 					move.moveClock = 0;
-					move.material.black[code_to_materialIndex[left]]--;
+					move.material.white[code_to_materialIndex[left]]--;
+					move.capture = true;
 					if(index < 16){//promotions
 						let queenPromotion = copyBoard(move);
 						let rookPromotion = copyBoard(move);
@@ -403,7 +620,8 @@ let rawMoveGen = function(board){
 					move.pos[index - 8 + 1] = 9;
 					move.pos[index] = 0;
 					move.moveClock = 0;
-					move.material.black[code_to_materialIndex[right]]--;
+					move.material.white[code_to_materialIndex[right]]--;
+					move.capture = true;
 					if(index < 16){//promotions
 						let queenPromotion = copyBoard(move);
 						let rookPromotion = copyBoard(move);
@@ -425,26 +643,6 @@ let rawMoveGen = function(board){
 					else{
 						list.push(move)
 					}
-				}
-			}
-			if(board.enPassantFile){
-				if(index - 24 === board.enPassantFile){
-					let move = copyNext(board);
-					move.pos[index - 8 + 1] = 9;
-					move.pos[index + 1] = 0;
-					move.pos[index] = 0;
-					move.moveClock = 0;
-					move.material.white[0]--;
-					list.push(move)
-				}
-				else if(index - 26 === board.enPassantFile){
-					let move = copyNext(board);
-					move.pos[index - 8 - 1] = 9;
-					move.pos[index - 1] = 0;
-					move.pos[index] = 0;
-					move.moveClock = 0;
-					move.material.white[0]--;
-					list.push(move)
 				}
 			}
 		}
@@ -483,15 +681,17 @@ let rawMoveGen = function(board){
 						move.pos[index] = 0;
 						move.moveClock = 0;
 						move.material.white[material]--;
+						move.capture = true;
 						list.push(move)
 					}
-					else if(board.isWhite){
+					else if(piece > 8 && board.isWhite){
 						let move = copyNext(board);
 						let material = code_to_materialIndex[move.pos[target]];
 						move.pos[target] = pos;
 						move.pos[index] = 0;
 						move.moveClock = 0;
 						move.material.black[material]--;
+						move.capture = true;
 						list.push(move)
 					}
 				}
@@ -502,7 +702,7 @@ let rawMoveGen = function(board){
 			if(pos === 6 || pos === 14 || pos === 2 || pos === 10 || pos === 5 || pos === 13){
 				offsets.push([0,-1],[-1,0],[1,0],[0,1])
 			}
-			if(pos === 6 || pos === 14 || pos === 3 || pos === 11 || pos === 5 || pos === 13){
+			if(pos === 6 || pos === 14 || pos === 4 || pos === 12 || pos === 5 || pos === 13){
 				offsets.push([-1,-1],[1,-1],[-1,1],[1,1])
 			}
 			offsets.forEach(pair => {
@@ -584,6 +784,7 @@ let rawMoveGen = function(board){
 						else if(index === 63){
 							move.castle.black.oo = false
 						}
+						move.capture = true;
 						list.push(move);
 						break
 					}
@@ -613,6 +814,8 @@ let moveGen = function(board){
 				move.pos[5] = 2;
 				move.pos[7] = 0;
 				if(!isCheck(move,true)){
+					move.castle.white.oo = false;
+					move.castle.white.ooo = false;
 					list.push(move)
 				}
 			}
@@ -626,6 +829,8 @@ let moveGen = function(board){
 				move.pos[3] = 2;
 				move.pos[0] = 0;
 				if(!isCheck(move,true)){
+					move.castle.white.oo = false;
+					move.castle.white.ooo = false;
 					list.push(move)
 				}
 			}
@@ -641,6 +846,8 @@ let moveGen = function(board){
 				move.pos[61] = 10;
 				move.pos[63] = 0;
 				if(!isCheck(move,false)){
+					move.castle.black.oo = false;
+					move.castle.black.ooo = false;
 					list.push(move)
 				}
 			}
@@ -654,6 +861,8 @@ let moveGen = function(board){
 				move.pos[59] = 10;
 				move.pos[56] = 0;
 				if(!isCheck(move,false)){
+					move.castle.black.oo = false;
+					move.castle.black.ooo = false;
 					list.push(move)
 				}
 			}
@@ -662,6 +871,197 @@ let moveGen = function(board){
 	return list
 }
 
+let evalMoveGen = function(board){
+	let list = rawMoveGen(board);
+	if(board.isWhite){
+		if(board.castle.white.oo && board.pos[5] === 0 && board.pos[6] === 0){
+			let move = copyNext(board);
+			move.pos[5] = 6;
+			move.pos[4] = 0;
+				move.pos[6] = 6;
+				move.pos[5] = 2;
+				move.pos[7] = 0;
+					list.push(move)
+		}
+		if(board.castle.white.ooo && board.pos[3] === 0 && board.pos[2] === 0 && board.pos[1] === 0){
+			let move = copyNext(board);
+			move.pos[3] = 6;
+			move.pos[4] = 0;
+				move.pos[2] = 6;
+				move.pos[3] = 2;
+				move.pos[0] = 0;
+					list.push(move)
+		}
+	}
+	else{
+		if(board.castle.black.oo && board.pos[61] === 0 && board.pos[62] === 0){
+			let move = copyNext(board);
+			move.pos[61] = 14;
+			move.pos[60] = 0;
+				move.pos[62] = 14;
+				move.pos[61] = 10;
+				move.pos[63] = 0;
+					list.push(move)
+		}
+		if(board.castle.black.ooo && board.pos[57] === 0 && board.pos[58] === 0 && board.pos[59] === 0){
+			let move = copyNext(board);
+			move.pos[59] = 14;
+			move.pos[60] = 0;
+				move.pos[58] = 14;
+				move.pos[59] = 10;
+				move.pos[56] = 0;
+					list.push(move)
+		}
+	}
+	return list
+}
 
-let eval = function(board){
+let scoreEval = function(board){
+	let material =
+		board.material.white[0] - board.material.black[0]
+		+ board.material.white[1]*5 - board.material.black[1]*5
+		+ board.material.white[2]*3 - board.material.black[2]*3
+		+ board.material.white[3]*3 - board.material.black[3]*3
+		+ board.material.white[4]*9 - board.material.black[4]*9
+		+ 0.1 * (mobility(board,true) - mobility(board,false))
+	return material
+}
+
+let score = function(board,depth){
+	if(board.material.white[5] === 0){
+		return - 10000
+	}
+	if(board.material.black[5] === 0){
+		return 10000
+	}
+	if(depth === 0){
+		return scoreEval(board)
+	}
+	if(board.isWhite){
+		let moves = evalMoveGen(board);
+		if(moves.length === 0){
+			if(isCheck(board,true)){
+				return -10000
+			}
+			else{
+				return 0
+			}
+		}
+		for(let i=0;i<moves.length;i++){
+			let deeper = score(moves[i],Math.min(1,depth - 1));
+			if(deeper > 1000){
+				return deeper
+			}
+			moves[i].depth1 = deeper
+		}
+		if(depth > 1){
+			moves.sort((b,a) => a.depth1 - b.depth1);
+			let lim = 2;
+			let best = moves[0].depth1;
+			if(depth > 3){
+				if(!moves[0].capture){
+					moves[0].depth1 = score(moves[0],depth - 2);
+				}
+				if(!moves[1].capture){
+					moves[1].depth1 = score(moves[0],depth - 2);
+				}
+			}
+			for(let i=2;i<moves.length;i++){
+				if(moves[i].capture){//if((best - moves[i].depth1 < 5) && i < lim){
+					moves[i].depth1 = score(moves[i],depth - 1)
+				}
+			}
+		}
+		return Math.max(...moves.map(a => a.depth1));
+	}
+	else{
+		let moves = evalMoveGen(board);
+		if(moves.length === 0){
+			if(isCheck(board,false)){
+				return 10000
+			}
+			else{
+				return 0
+			}
+		}
+		for(let i=0;i<moves.length;i++){
+			let deeper = score(moves[i],Math.min(1,depth - 1));
+			if(deeper < -1000){
+				return deeper
+			}
+			moves[i].depth1 = deeper
+		}
+		if(depth > 1){
+			moves.sort((a,b) => a.depth1 - b.depth1);
+			let lim = 2;
+			let best = moves[0].depth1;
+			if(depth > 3){
+				if(!moves[0].capture){
+					moves[0].depth1 = score(moves[0],depth - 2);
+				}
+				if(!moves[1].capture){
+					moves[1].depth1 = score(moves[0],depth - 2);
+				}
+			}
+			for(let i=2;i<moves.length;i++){
+				if(moves[i].capture){///if((best - moves[i].depth1 > -5) && i < lim){
+					moves[i].depth1 = score(moves[i],depth - 1)
+				}
+			}
+		}
+		return Math.min(...moves.map(a => a.depth1));
+	}
+}
+
+
+function notationDec(notation,board){
+	//let normal_proto = notation.replace(/(#|\?|\?\?|!!|!|!\?|\?!|\+)$/,"");
+	if(notation === "O-O"){
+		if(board.isWhite){
+			let move = copyNext(board);
+			move.pos[5] = 6;
+			move.pos[4] = 0;
+			move.pos[6] = 6;
+			move.pos[5] = 2;
+			move.pos[7] = 0;
+			return move
+		}
+		else{
+			let move = copyNext(board);
+			move.pos[61] = 14;
+			move.pos[60] = 0;
+			move.pos[62] = 14;
+			move.pos[61] = 10;
+			move.pos[63] = 0;
+			return move
+		}
+	}
+	else if(notation === "O-O-O"){
+		if(board.isWhite){
+			let move = copyNext(board);
+			move.pos[3] = 6;
+			move.pos[4] = 0;
+			move.pos[2] = 6;
+			move.pos[3] = 2;
+			move.pos[0] = 0;
+			return move
+		}
+		else{
+			let move = copyNext(board);
+			move.pos[59] = 14;
+			move.pos[60] = 0;
+			move.pos[58] = 14;
+			move.pos[59] = 10;
+			move.pos[56] = 0;
+			return move
+		}
+	}
+	let validMoves = moveGen(hohChess.board);
+	for(let i=0;i<validMoves.length;i++){
+		let notat = finalNotation(validMoves[i],board,validMoves);
+		if(notat === notation){
+			return validMoves[i]
+		}
+	}
+	return null
 }
