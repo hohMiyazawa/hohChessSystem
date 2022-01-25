@@ -162,8 +162,8 @@ let createNotation = function(start,end){
 				source = i
 			}
 		}
-		notation.text = code_to_symbol[end.pos[target]];
 		notation.startFile = files[source % 8];
+		notation.text = code_to_symbol[end.pos[target]];
 		notation.startRank = Math.floor(source / 8) + 1;
 		notation.endFile = files[target % 8];
 		notation.endRank = Math.floor(target / 8) + 1
@@ -199,7 +199,7 @@ let finalNotation = function(move,orig,moveList){
 	}
 	if(myMove.capture){
 		if(myMove.text === ""){
-			text += myMove.startFile
+			text = myMove.startFile
 		}
 		text += "x"
 	}
@@ -376,6 +376,9 @@ let mobility = function(board,isWhite){
 
 let rawMoveGen = function(board){
 	let list = [];
+	if(board.material.white[5] === 0 || board.material.black[5] === 0){
+		return list
+	}
 	if(board.enPassantFile){
 		if(board.isWhite){
 			if(board.enPassantFile !== 1){
@@ -871,7 +874,16 @@ let moveGen = function(board){
 	return list
 }
 
-let evalMoveGen = function(board){
+let evalMoveGen = function(board,level){
+	if(level < 2){
+		let list = moveGen(board);
+		list.forEach(move => {
+			if(isCheck(move,move.isWhite)){
+				move.capture = true
+			}
+		})
+		return list;
+	}
 	let list = rawMoveGen(board);
 	if(board.isWhite){
 		if(board.castle.white.oo && board.pos[5] === 0 && board.pos[6] === 0){
@@ -916,18 +928,83 @@ let evalMoveGen = function(board){
 	return list
 }
 
-let scoreEval = function(board){
-	let material =
-		board.material.white[0] - board.material.black[0]
-		+ board.material.white[1]*5 - board.material.black[1]*5
-		+ board.material.white[2]*3 - board.material.black[2]*3
-		+ board.material.white[3]*3 - board.material.black[3]*3
-		+ board.material.white[4]*9 - board.material.black[4]*9
-		+ 0.1 * (mobility(board,true) - mobility(board,false))
-	return material
-}
+/*
+00,01,02,03,04,05,06,07
+08,09,10,11,12,13,14,15
+16,17,18,19,20,21,22,23
+24,25,26,27,28,29,30,31
+32,33,34,35,36,37,38,39
+40,41,42,43,44,45,46,47
+48,49,50,51,52,53,54,55
+56,57,58,59,60,61,62,63
+*/
 
-let score = function(board,depth){
+let scoreEval = function(board){
+	if(board.material.white[5] === 0){
+		return -10000
+	}
+	if(board.material.black[5] === 0){
+		return 10000
+	}
+	if(board.material.white[0] + board.material.white[0] === 0){
+		if([
+[[0,0,0,0,0,1],[0,0,0,0,0,1]],
+[[0,0,1,0,0,1],[0,0,0,0,0,1]],
+[[0,0,1,0,0,1],[0,0,1,0,0,1]],
+[[0,0,0,0,0,1],[0,0,1,0,0,1]],
+[[0,0,0,0,0,1],[0,0,2,0,0,1]],
+[[0,0,2,0,0,1],[0,0,0,0,0,1]],
+[[0,0,2,0,0,1],[0,0,1,0,0,1]],
+[[0,0,1,0,0,1],[0,0,2,0,0,1]],
+[[0,0,1,0,0,1],[0,0,0,1,0,1]],
+[[0,0,0,1,0,1],[0,0,1,0,0,1]],
+[[0,0,0,1,0,1],[0,0,0,0,0,1]],
+[[0,0,0,0,0,1],[0,0,0,1,0,1]]
+		].some(pair => board.material.white.every((a,i) => a === pair[0][i]) && board.material.black.every((a,i) => a === pair[1][i])
+		)){
+			return 0
+		}
+	}
+	let pawnFileCount_white = new Array(8).fill(0);
+	let pawnFileCount_black = new Array(8).fill(0);
+	for(let i=8;i<56;i++){
+		if(board.pos[i] === 1){
+			pawnFileCount_white[i % 8]++
+		}
+		else if(board.pos[i] === 9){
+			pawnFileCount_black[i % 8]++
+		}
+	}
+	let pawns = board.material.white[0] - board.material.black[0];
+	let material_white = board.material.white[1]*5
+		+ board.material.white[2]*3
+		+ board.material.white[3]*3
+		+ board.material.white[4]*10;
+	let material_black = board.material.black[1]*5
+		+ board.material.black[2]*3
+		+ board.material.black[3]*3
+		+ board.material.black[4]*10;
+	let trade_bonus = 0;
+	if(material_white > material_black + 1){
+		trade_bonus = 2/(material_black + 1)
+	}
+	else if(material_black > material_white + 1){
+		trade_bonus = -2/(material_white + 1)
+	}
+	return material_white - material_black + trade_bonus
+		+ pawns
+		+ 0.1 * (mobility(board,true) - mobility(board,false))
+		+ 0.1 * (
+			(board.pos[27] === 1 + board.pos[28] === 1 + board.pos[35] === 1 + board.pos[36] === 1)
+			- (board.pos[27] === 9 + board.pos[28] === 9 + board.pos[35] === 9 + board.pos[36] === 9)
+		)
+		- 0.4 * (
+			pawnFileCount_white.reduce((acc,val) => {if(val){return acc + val - 1}else{return acc}},0)
+			- pawnFileCount_black.reduce((acc,val) => {if(val){return acc + val - 1}else{return acc}},0)
+		)
+}
+/*
+let score_old = function(board,depth){
 	if(board.material.white[5] === 0){
 		return - 10000
 	}
@@ -1010,6 +1087,145 @@ let score = function(board,depth){
 			}
 		}
 		return Math.min(...moves.map(a => a.depth1));
+	}
+}*/
+
+let decay = 1.3;
+
+let listScorer_white = function(moves,budget,level){
+	if(moves.length === 1){
+		moves[0].spent = budget;
+		moves[0].depth1 = score(moves[0],budget,level+1)
+		return
+	}
+	let lesser = Math.ceil(budget/10);
+	if(lesser > 20){
+		listScorer_white(moves,lesser,level)
+	}
+	if(moves[0].spent){
+		if(moves[0].depth1 > 1000 || moves[0].depth1 < -1000){
+			return
+		}
+		let weights = new Array(moves.length).fill(0.01);
+		let base = 1;
+		let prev = moves[0].depth1;
+		weights[0] = 1;
+		if(moves[0].capture){
+			weights[0] += 1
+		}
+		for(let i=1;i<moves.length;i++){
+			if(moves[i].capture){
+				weights[i] += 1
+			}
+			let diff = prev - moves[i].depth1;
+			base = base/Math.pow(decay,diff);
+			weights[i] += base
+		};
+		let total = weights.reduce((acc,val) => acc + val,0);
+		for(let i=0;i<moves.length;i++){
+			let aloc = Math.round(budget * weights[i]/total);
+			if(aloc > 2*moves[i].spent){
+				moves[i].spent = aloc;
+				moves[i].depth1 = score(moves[i],aloc,level+1)
+			}
+		}
+		moves.sort((b,a) => a.depth1 - b.depth1);
+	}
+	else{
+		for(let i=0;i<moves.length;i++){
+			moves[i].depth1 = scoreEval(moves[i]);
+			moves[i].spent = 1
+		};
+		moves.sort((b,a) => a.depth1 - b.depth1);
+	}
+}
+
+let listScorer_black = function(moves,budget,level){
+	if(moves.length === 1){
+		moves[0].spent = budget;
+		moves[0].depth1 = score(moves[0],budget,level+1)
+		return
+	}
+	let lesser = Math.ceil(budget/10);
+	if(lesser > 20){
+		listScorer_black(moves,lesser,level)
+	}
+	if(moves[0].spent){
+		if(moves[0].depth1 > 1000 || moves[0].depth1 < -1000){
+			return
+		}
+		let weights = new Array(moves.length).fill(0.01);
+		let base = 1;
+		let prev = moves[0].depth1;
+		weights[0] = 1;
+		if(moves[0].capture){
+			weights[0] += 1
+		}
+		for(let i=1;i<moves.length;i++){
+			if(moves[i].capture){
+				weights[i] += 1
+			}
+			let diff = moves[i].depth1 - prev;
+			base = base/Math.pow(decay,diff);
+			weights[i] += base
+		};
+		let total = weights.reduce((acc,val) => acc + val,0);
+		for(let i=0;i<moves.length;i++){
+			let aloc = Math.round(budget * weights[i]/total);
+			if(aloc > 2*moves[i].spent){
+				moves[i].spent = aloc;
+				moves[i].depth1 = score(moves[i],aloc,level+1)
+			}
+		}
+		moves.sort((a,b) => a.depth1 - b.depth1)
+	}
+	else{
+		for(let i=0;i<moves.length;i++){
+			moves[i].depth1 = scoreEval(moves[i]);
+			moves[i].spent = 1
+		}
+		moves.sort((a,b) => a.depth1 - b.depth1)
+	}
+}
+
+let nolus = new Array(20).fill(0);
+
+let score = function(board,budget,level){
+	nolus[level]++;
+	if(board.material.white[5] === 0){
+		return - 10000
+	}
+	if(board.material.black[5] === 0){
+		return 10000
+	}
+	if(budget < 10){
+		return scoreEval(board)
+	}
+	if(board.isWhite){
+		let moves = evalMoveGen(board,level);
+		if(moves.length === 0){
+			if(isCheck(board,true)){
+				return -10000
+			}
+			else{
+				return 0
+			}
+		}
+		listScorer_white(moves,budget,level)
+		return Math.max(...moves.map(a => a.depth1))
+	}
+	else{
+		let moves = evalMoveGen(board,level);
+		if(moves.length === 0){
+			if(isCheck(board,false)){
+				return 10000
+			}
+			else{
+				return 0
+			}
+		}
+		listScorer_black(moves,budget,level)
+		return Math.min(...moves.map(a => a.depth1))
 	}
 }
 

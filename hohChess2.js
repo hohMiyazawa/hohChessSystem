@@ -204,26 +204,23 @@ let hohChess = {
 						return
 					}
 				}
-				moves.forEach(move => {
-					move.eng = score(move,hohChess.options.depth)
-				});
 				if(hohChess.board.isWhite){
-					moves.sort((b,a) => a.eng - b.eng)
+					listScorer_white(moves,hohChess.options.depth,0)
 				}
 				else{
-					moves.sort((a,b) => a.eng - b.eng)
+					listScorer_black(moves,hohChess.options.depth,0)
 				}
 				moves.forEach(move => {
 					let text = document.createElement("p");
 					text.innerText = finalNotation(move,hohChess.board,moves);
-					if(move.eng === 0){
-						text.innerText += " | 0.00"
+					if(move.depth1 === 0){
+						text.innerText += " | 0.00"  + "(" + move.spent + ")"
 					}
-					else if(move.eng > 0){
-						text.innerText += " | +" + move.eng
+					else if(move.depth1 > 0){
+						text.innerText += " | +" + move.depth1.toPrecision(3) + "(" + move.spent + ")"
 					}
 					else{
-						text.innerText += " | " + move.eng
+						text.innerText += " | " + move.depth1.toPrecision(3) + "(" + move.spent + ")"
 					}
 					hohChess.moveList.appendChild(text)
 				})
