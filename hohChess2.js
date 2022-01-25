@@ -103,6 +103,12 @@ let hohChess = {
 			moveProposed.pos[59] = 10;
 			moveProposed.pos[56] = 0;
 		}
+		else if(piece === 1 && ((end - start === 7) || (end - start === 9))){
+			moveProposed.pos[end - 8] = 0
+		}
+		else if(piece === 9 && ((end - start === -7) || (end - start === -9))){
+			moveProposed.pos[end + 8] = 0
+		}
 		let validMoves = moveGen(hohChess.board);
 		//console.log(validMoves,moveProposed);
 		return validMoves.some(move => {

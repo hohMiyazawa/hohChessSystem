@@ -151,7 +151,7 @@ let createNotation = function(start,end){
 			if(end.pos[i] && end.pos[i] !== start.pos[i]){
 				target = i
 			}
-			else if(start.pos[i] && !end.pos[i]){
+			else if(start.pos[i] && !end.pos[i] && player && ((start.pos[i] < 8 && player) || (start.pos[i] > 8 && !player))){
 				source = i
 			}
 		}
@@ -184,6 +184,9 @@ let finalNotation = function(move,orig,moveList){
 		}
 	}
 	if(myMove.capture){
+		if(myMove.text === ""){
+			text += myMove.startFile
+		}
 		text += "x"
 	}
 	text += myMove.endFile + myMove.endRank;
@@ -303,7 +306,7 @@ let rawMoveGen = function(board){
 				}
 			}
 			if(board.enPassantFile){
-				if(index - 34 === board.enPassantFile){
+				if(index - 32 === board.enPassantFile){
 					let move = copyNext(board);
 					move.pos[index + 8 - 1] = 1;
 					move.pos[index - 1] = 0;
@@ -312,7 +315,7 @@ let rawMoveGen = function(board){
 					move.material.black[0]--;
 					list.push(move)
 				}
-				else if(index - 32 === board.enPassantFile){
+				else if(index - 30 === board.enPassantFile){
 					let move = copyNext(board);
 					move.pos[index + 8 + 1] = 1;
 					move.pos[index + 1] = 0;
@@ -364,9 +367,9 @@ let rawMoveGen = function(board){
 			}
 			if(index % 8 !== 0){
 				let left = board.pos[index - 8 - 1];
-				if(left < 8){
+				if(left && left < 8){
 					let move = copyNext(board);
-					move.pos[index - 8 - 1] = 1;
+					move.pos[index - 8 - 1] = 9;
 					move.pos[index] = 0;
 					move.moveClock = 0;
 					move.material.black[code_to_materialIndex[left]]--;
@@ -395,9 +398,9 @@ let rawMoveGen = function(board){
 			}
 			if(index % 8 !== 7){
 				let right = board.pos[index - 8 + 1];
-				if(right < 8){
+				if(right && right < 8){
 					let move = copyNext(board);
-					move.pos[index - 8 + 1] = 1;
+					move.pos[index - 8 + 1] = 9;
 					move.pos[index] = 0;
 					move.moveClock = 0;
 					move.material.black[code_to_materialIndex[right]]--;
@@ -424,8 +427,8 @@ let rawMoveGen = function(board){
 					}
 				}
 			}
-			if(board.enPassantFile && index > 47){
-				if(((index % 8) + 2) === board.enPassantFile){
+			if(board.enPassantFile){
+				if(index - 24 === board.enPassantFile){
 					let move = copyNext(board);
 					move.pos[index - 8 + 1] = 9;
 					move.pos[index + 1] = 0;
@@ -434,7 +437,7 @@ let rawMoveGen = function(board){
 					move.material.white[0]--;
 					list.push(move)
 				}
-				else if((index % 8) === board.enPassantFile){
+				else if(index - 26 === board.enPassantFile){
 					let move = copyNext(board);
 					move.pos[index - 8 - 1] = 9;
 					move.pos[index - 1] = 0;
@@ -473,7 +476,23 @@ let rawMoveGen = function(board){
 						move.moveClock++;
 						list.push(move)
 					}
-					else{
+					else if(piece < 8 && !board.isWhite){
+						let move = copyNext(board);
+						let material = code_to_materialIndex[move.pos[target]];
+						move.pos[target] = pos;
+						move.pos[index] = 0;
+						move.moveClock = 0;
+						move.material.white[material]--;
+						list.push(move)
+					}
+					else if(board.isWhite){
+						let move = copyNext(board);
+						let material = code_to_materialIndex[move.pos[target]];
+						move.pos[target] = pos;
+						move.pos[index] = 0;
+						move.moveClock = 0;
+						move.material.black[material]--;
+						list.push(move)
 					}
 				}
 			})
