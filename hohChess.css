@@ -28,3 +28,10 @@
 .hohFail{
 	margin-left: 520px;
 }
+.hohMoveList{
+	float: right;
+	padding: 5px;
+}
+.hohMoveList p{
+	margin: 2px;
+}
