@@ -2052,7 +2052,9 @@ const whiteBook = {
 							]}]},
 							{move: "f6",   freq:   17692},
 							{move: "g6",   freq:    7391},
-							{move: "Nd7",  freq:    4214},
+							{move: "Nd7",  freq:    4214,book:[{move: "Bd3",replies:[
+								{move: "e6",   freq: 1,book:[{move: "c3"}]},//and probably Ne2
+							]}]},
 							{move: "a6",   freq:    3277},
 						]},
 						{move: "exd5"},{move: "Nc3"}]},
