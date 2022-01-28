@@ -939,6 +939,40 @@ let evalMoveGen = function(board,level){
 56,57,58,59,60,61,62,63
 */
 
+const centralValue = [
+0,0,0,0,0,0,0,0,
+0,1,1,1,1,1,1,0,
+0,1,2,2,2,2,1,0,
+0,1,2,3,3,2,1,0,
+0,1,2,3,3,2,1,0,
+0,1,2,2,2,2,1,0,
+0,1,1,1,1,1,1,0,
+0,0,0,0,0,0,0,0
+];
+
+const white_pawns = [
+0   ,0   ,0   ,0   ,0   ,0   ,0   ,0,
+0.9 ,0.95,1.05,1.1 ,1.1 ,1.05,0.95,0.9,
+0.91,0.96,1.06,1.15,1.15,1.06,0.96,0.91,
+0.92,0.97,1.10,1.20,1.20,1.10,0.97,0.92,
+0.97,1.03,1.17,1.27,1.27,1.17,1.03,0.97,
+1.06,1.12,1.25,1.40,1.40,1.25,1.12,1.06,
+3   ,3   ,3   ,3   ,3   ,3   ,3   ,3,
+0   ,0   ,0   ,0   ,0   ,0   ,0   ,0
+];
+
+const black_pawns = [
+0   ,0   ,0   ,0   ,0   ,0   ,0   ,0,
+3   ,3   ,3   ,3   ,3   ,3   ,3   ,3,
+1.06,1.12,1.25,1.40,1.40,1.25,1.12,1.06,
+0.97,1.03,1.17,1.27,1.27,1.17,1.03,0.97,
+0.92,0.97,1.10,1.20,1.20,1.10,0.97,0.92,
+0.91,0.96,1.06,1.15,1.15,1.06,0.96,0.91,
+0.9 ,0.95,1.05,1.1 ,1.1 ,1.05,0.95,0.9,
+0   ,0   ,0   ,0   ,0   ,0   ,0   ,0
+];
+
+
 let scoreEval = function(board){
 	if(board.material.white[5] === 0){
 		return -10000
@@ -967,12 +1001,15 @@ let scoreEval = function(board){
 	}
 	let pawnFileCount_white = new Array(8).fill(0);
 	let pawnFileCount_black = new Array(8).fill(0);
+	let pawn_adv = 0;
 	for(let i=8;i<56;i++){
 		if(board.pos[i] === 1){
-			pawnFileCount_white[i % 8]++
+			pawnFileCount_white[i % 8]++;
+			pawn_adv += white_pawns[i];
 		}
 		else if(board.pos[i] === 9){
-			pawnFileCount_black[i % 8]++
+			pawnFileCount_black[i % 8]++;
+			pawn_adv -= black_pawns[i]
 		}
 	}
 	let pawns = board.material.white[0] - board.material.black[0];
@@ -991,14 +1028,25 @@ let scoreEval = function(board){
 	else if(material_black > material_white + 1){
 		trade_bonus = -2/(material_white + 1)
 	}
+	if(material_white + material_black <= 15){
+		for(let i=0;i<64;i++){
+			if(board.pos[i] === 6){
+				trade_bonus += centralValue[i]
+			}
+			else if(board.pos[i] === 14){
+				trade_bonus -= centralValue[i]
+			}
+		}
+	}
 	return material_white - material_black + trade_bonus
-		+ pawns
+		//+ pawns
+		+ pawn_adv
 		+ 0.1 * (mobility(board,true) - mobility(board,false))
 		+ 0.1 * (
 			(board.pos[27] === 1 + board.pos[28] === 1 + board.pos[35] === 1 + board.pos[36] === 1)
 			- (board.pos[27] === 9 + board.pos[28] === 9 + board.pos[35] === 9 + board.pos[36] === 9)
 		)
-		- 0.4 * (
+		- 0.2 * (
 			pawnFileCount_white.reduce((acc,val) => {if(val){return acc + val - 1}else{return acc}},0)
 			- pawnFileCount_black.reduce((acc,val) => {if(val){return acc + val - 1}else{return acc}},0)
 		)
