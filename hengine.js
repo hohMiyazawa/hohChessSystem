@@ -1021,6 +1021,14 @@ let scoreEval = function(board){
 		+ board.material.black[2]*3
 		+ board.material.black[3]*3
 		+ board.material.black[4]*10;
+	//bishop pair
+	if(board.material.white[3] === 2){
+		material_white += 0.5
+	}
+	if(board.material.black[3] === 2){
+		material_black += 0.5
+	}
+	//
 	let trade_bonus = 0;
 	if(material_white > material_black + 1){
 		trade_bonus = 2/(material_black + 1)
