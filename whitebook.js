@@ -1,3 +1,552 @@
+const main_philidor = [
+	{move: "Be7", freq:  92038,book:[{move: "Bf4",replies:[
+		{move: "O-O", freq:  4458,book:[{move: "Qd2",replies:[
+			{move: "c5", freq: 492,book:[{move: "Nd4b5",replies:[
+				{move: "a6", freq: 108,book:[{move: "Nxd6"}]},
+				{move: "Nc6", freq: 32,book:[]},
+			]}]},
+			{move: "a6", freq: 297,book:[]},
+			{move: "Nc6", freq:281,book:[]},
+		]}]},
+		{move: "Bd7", freq:   384,book:[]},
+		{move: "c5", freq:    345,book:[]},
+		{move: "a6", freq:    279,book:[]},
+	]}]},
+	{move: "c5", freq:   16145,book:[{move: "Bb5+"}]},
+	{move: "Bd7", freq:  11366,book:[]},
+	{move: "Nc6", freq:   9950,book:[{move: "Bb5"}]},
+];
+
+const skot_nights = {move: "d4",replies:[
+	{move: "exd4", freq:  632095,book:[{move: "Nxd4",replies:[
+		{move: "Bb4",  freq:  378564,book:[{move: "Nxc6",replies:[
+			{move: "bxc6",   freq:  268964,book:[{move: "Bd3",replies:[
+				{move: "d5",  freq:  125694,book:[{move: "exd5",replies:[
+					{move: "cxd5",  freq: 73085,book:[{move: "h3",replies:[
+						{move: "O-O",  freq:  69,book:[{move: "O-O",replies:[
+							{move: "c6",   freq:  10441,book:[{move: "Bf4"}]},
+							{move: "h6",   freq:   3535,book:[]},
+							{move: "Be6",  freq:    832,book:[]},
+							{move: "Re8",  freq:    707,book:[]},
+							{move: "c5",   freq:    508,book:[]},
+						]}]},
+						{move: "d4",   freq:  19,book:[]},
+						{move: "c6",   freq:   6,book:[]},
+					]}]},
+					{move: "O-O",  freq:  21652,book:[]},
+					{move: "Qe7+", freq:   3782,book:[]},
+					{move: "Nxd5",  freq:  2149,book:[]},
+				]}]},
+				{move: "O-O",  freq:  75199,book:[{move: "O-O",replies:[
+					{move: "d5",  freq:  31598,book:[{move: "exd5"}]},
+					{move: "Re8",  freq: 15446,book:[{move: "Bg5"}]},
+					{move: "d6",   freq:  5058,book:[]},
+					{move: "Bxc3",  freq: 4985,book:[]},
+					{move: "h6",    freq: 3526,book:[]},
+					{move: "Bb7",   freq:  738,book:[]},
+				]}]},
+				{move: "d6",  freq:    8211,book:[]},
+				{move: "Bxc3+",  freq: 6091,book:[]},
+				{move: "Qe7",    freq: 4963,book:[]},
+			]}]},
+			{move: "Bxc3+",   freq:  20615,book:[{move: "bxc3"}]},
+			{move: "dxc6",   freq:   12917,book:[{move: "Qxd8+"}]},
+		]}]},
+		{move: "Nxd4", freq:  183579,book:[{move: "Qxd4",replies:[
+			{move: "d6",   freq: 106447,book:[{move: "Bf4"}]},
+			{move: "b6",   freq:  42510,book:[{move: "e5"}]},
+			{move: "c5",   freq:  39963,book:[{move: "Qd3"}]},
+			{move: "Be7",  freq:  33848,book:[{move: "e5"}]},
+			{move: "Qe7",  freq:   8880,book:[]},
+			{move: "c6",   freq:   5928,book:[]},
+			{move: "Bd6",  freq:   4887,book:[]},
+			{move: "d5",   freq:   3503,book:[]},
+			{move: "g6",   freq:   2500,book:[]},
+			{move: "h6",   freq:   2022,book:[]},
+		]}]},
+		{move: "Bc5",  freq:  155012,book:[{move: "Be3",replies:[
+			{move: "Nxd4", freq:  18547,book:[{move: "Bxd4"}]},
+			{move: "Bb6",  freq:  14581,book:[{move: "Qd2"}]},
+			{move: "O-O",  freq:  11079,book:[{move: "Nxc6"}]},
+			{move: "Bxd4", freq:   8110,book:[{move: "Bxd4"}]},
+			{move: "d6",   freq:   6917,book:[{move: "Nxc6"}]},
+			{move: "Qe7",  freq:   5005,book:[{move: "Nf5"}]},
+			{move: "Bb4",  freq:   4178,book:[{move: "Nxc6"}]},
+			{move: "d5",   freq:   1214,book:[]},
+		]}]},
+		{move: "d6",   freq:   45897,book:[{move: "Bb5"}]},
+		{move: "Be7",  freq:   14875,book:[]},
+		{move: "d5",   freq:   11590,book:[]},
+		{move: "Ne5",  freq:   10625,book:[]},
+		{move: "Nxe4", freq:    9636,book:[]},
+		{move: "Qe7",  freq:    4094,book:[]},
+	]}]},
+	{move: "Bb4",  freq:   66985,book:[{move: "Nxe5",replies:[
+		{move: "Nxe4", freq:  2744,book:[{move: "Qg4"}]},
+		{move: "Nxe5", freq:  2142,book:[{move: "dxe5"}]},
+		{move: "Qe7",  freq:  1535,book:[{move: "Qd3"}]},
+		{move: "Bxc3+",  freq: 996,book:[]},
+		{move: "O-O",  freq:   966,book:[]},
+	]}]},
+	{move: "d6",   freq:   49080,book:[{move: "Bb5"}]},
+	{move: "Nxd4", freq:   11033,book:[]},
+	{move: "d5",   freq:   10967,book:[]},
+	{move: "Bc5",  freq:    8026,book:[]},
+	{move: "Bd6",  freq:    6359,book:[]},
+]};
+
+const fork_nights = {move: "Nc3",replies:[
+	{move: "Nf6", freq:  1628039,book:[skot_nights]},
+	{move: "Bc5", freq:   833235,book:[{move: "Nxe5",replies:[
+		{move: "Nxe5",  freq:  77143,book:[{move: "d4",replies:[
+			{move: "Bxd4",   freq:  26279,book:[{move: "Qxd4",replies:[
+				{move: "d6",    freq:  16202,book:[{move: "Be3"}]},
+				{move: "Nc6",   freq:   7890,book:[{move: "Qxg7"}]},
+				{move: "Qf6",   freq:   7368,book:[{move: "Nb5"}]},
+				{move: "f6",    freq:   2394,book:[{move: "f4"}]},
+				{move: "Qe7",   freq:   1271,book:[]},
+				{move: "Ng6",   freq:    743,book:[]},
+			]}]},
+			{move: "Bd6",    freq:  19593,book:[{move: "dxe5"}]},
+			{move: "Bb4",    freq:   7737,book:[{move: "dxe5"}]},
+			{move: "Bb6",    freq:   5321,book:[{move: "dxe5"}]},
+			{move: "Nf3+",   freq:   2021,book:[{move: "gxf3"}]},
+			{move: "Qe7",    freq:   1604,book:[{move: "Nd5"}]},
+			{move: "Qf6",    freq:   1325,book:[{move: "dxc5"}]},
+		]}]},
+		{move: "Bxf2+", freq:  54864,book:[{move: "Kxf2",replies:[
+			{move: "Nxe5",   freq:  53941,book:[{move: "d4",replies:[
+				{move: "Ng6",   freq:  21898,book:[{move: "Be2",replies:[
+					{move: "d6",   freq:  1755,book:[{move: "Rf1"}]},
+					{move: "Ng8e7", freq:  626,book:[]},
+					{move: "Qh4+", freq:   498,book:[]},
+					{move: "Nf6", freq:    368,book:[]},
+					{move: "Qf6+", freq:   214,book:[]},
+					{move: "c6",   freq:   154,book:[]},
+					{move: "d5",   freq:   122,book:[]},
+				]}]},
+				{move: "Qf6+",  freq:  14910,book:[]},
+				{move: "Nc6",   freq:   5815,book:[]},
+				{move: "Qh4+",  freq:   3904,book:[]},
+			]}]},
+		]}]},
+		{move: "Nf6",   freq:   3420,book:[]},
+		{move: "d6",    freq:   2572,book:[]},
+		{move: "Qf6",   freq:   2472,book:[]},
+		{move: "Qh4",   freq:    868,book:[]},
+		{move: "Qe7",   freq:    528,book:[]},
+	]}]},
+	{move: "d6",  freq:   297228,book:[{move: "d4",replies:[
+		{move: "exd4",  freq: 84576,book:[{move: "Nxd4",replies:[
+			{move: "Nxd4",   freq: 64444,book:[{move: "Qxd4"}]},
+			{move: "Nf6",    freq: 54859,book:[{move: "Bb5"}]},
+			{move: "Bd7",    freq: 28427,book:[{move: "Be3"}]},
+			{move: "Be7",    freq: 12814,book:[]},
+			{move: "g6",     freq:  5107,book:[]},
+			{move: "Ne5",    freq:  4251,book:[]},
+			{move: "Ng8e7",  freq:  3105,book:[]},
+		]}]},
+		{move: "Bg4",   freq: 46476,book:[]},
+		{move: "Nf6",   freq: 15255,book:[]},
+		{move: "Be7",   freq:  6858,book:[]},
+		{move: "f5",    freq:  5219,book:[]},
+		{move: "Be6",   freq:  4859,book:[]},
+		{move: "Bd7",   freq:  4317,book:[]},
+		{move: "Nxd4",  freq:  4067,book:[]},
+	]}]},
+	{move: "Bb4", freq:   210423,book:[{move: "Nd5",replies:[
+		{move: "Bc5",freq:  8740,book:[{move: "Nxe5",replies:[
+			{move: "Nxe5",freq:  930,book:[{move: "d4"}]},
+			{move: "Bxf2+",freq: 360,book:[{move: "Kxf2",replies:[
+				{move: "Nxe5",freq:  343,book:[{move: "d4"}]},
+				{move: "Qh4+",freq:   17,book:[]},
+			]}]},
+			{move: "Nf6",freq:    21,book:[]},
+		]}]},
+		{move: "Nf6",freq:  7296,book:[{move: "Nxb4"}]},
+		{move: "Ba5",freq:  6416,book:[{move: "c3"}]},
+		{move: "d6", freq:  4135,book:[{move: "c3"}]},
+		{move: "Bd6",freq:  2172,book:[{move: "Nxe5"}]},
+		{move: "Ng8e7",freq:1116,book:[]},
+		{move: "Be7",freq:   888,book:[]},
+		{move: "a5", freq:   605,book:[]},
+	]}]},
+	{move: "f5",  freq:    57196,book:[{move: "d4"}]},
+	{move: "a6",  freq:    55722,book:[{move: "d4"}]},
+	{move: "g6",  freq:    33978,book:[{move: "d4"}]},
+	{move: "Be7", freq:    31799,book:[{move: "d4"}]},
+	{move: "h6",  freq:    30773,book:[{move: "d4"}]},
+	{move: "Nd4", freq:    13097,book:[{move: "Nxe5"}]},
+	{move: "f6",  freq:     9558,book:[{move: "a4"}]},
+	{move: "d5",  freq:     8527,book:[{move: "Nxd5"}]},
+]}
+
+const russian_nights = {move: "Nc3",replies:[
+	{move: "Nc6", freq:  1239443,book:[skot_nights]},
+	{move: "Bb4", freq:   364409,book:[{move: "Nxe5",replies:[
+		{move: "O-O", freq:  20321,book:[{move: "Nd3"}]},
+		{move: "Bxc3",freq:  19417,book:[{move: "dxc3"}]},
+		{move: "Qe7",freq:    5925,book:[{move: "Nf3"}]},
+		{move: "d6", freq:    5174,book:[{move: "Nc4"}]},
+		{move: "Nc6",freq:    1210,book:[]},
+	]}]},
+	{move: "Bc5", freq:   357524,book:[{move: "Nxe5",replies:[
+		{move: "Nc6",freq:  35084,book:[{move: "Nxc6",replies:[//stafford gambit 2
+			{move: "dxc6", freq:  27834,book:[{move: "h3",replies:[
+				{move: "h5",freq:  15521,book:[{move: "g3",replies:[
+					{move: "Qd6",freq: 13,book:[{move: "d3",replies:[
+						{move: "Be6",freq:  51,book:[{move: "Bg2",replies:[
+							{move: "O-O-O",freq:  12,book:[{move: "Bg5"}]},
+						]}]},
+						{move: "Bd7",freq:  20,book:[]},
+					]}]},
+					{move: "Qd4",freq: 10,book:[]},
+					{move: "Be6",freq:  4,book:[]},
+				]}]},
+				{move: "Qd4",freq: 11672,book:[]},
+				{move: "O-O",freq:  6246,book:[]},
+				{move: "Be6",freq:  2077,book:[]},
+				{move: "Qd6",freq:  1830,book:[]},
+			]}]},
+			{move: "bxc6", freq:    833,book:[]},
+		]}]},
+		{move: "d6", freq:  12276,book:[]},
+		{move: "O-O", freq: 10331,book:[]},
+		{move: "Qe7", freq:  8194,book:[]},
+		{move: "d5",  freq:  2163,book:[]},
+		{move: "Bxf2+",freq: 1808,book:[]},
+		{move: "Bd4",  freq: 1368,book:[]},
+		{move: "c6",  freq:   736,book:[]},
+	]}]},
+	{move: "d6",  freq:   234536,book:[{move: "d4",replies:[
+		{move: "exd4",  freq:  134977,book:[{move: "Nxd4",replies: main_philidor}]},
+		{move: "Nb8d7", freq:  125872,book:[]},
+		{move: "Bg4",   freq:   23158,book:[]},
+		{move: "Nc6",   freq:   20243,book:[]},
+		{move: "Be7",   freq:   20171,book:[]},
+		{move: "g6",    freq:    1788,book:[]},
+	]}]},
+	{move: "d5",  freq:    66062,book:[{move: "exd5"}]},
+	{move: "c6",  freq:    29153,book:[{move: "d4"}]},
+	{move: "Bd6", freq:     9154,book:[]},
+	{move: "Be7", freq:     8538,book:[]},
+	{move: "Nxe4", freq:    7221,book:[]},
+]}
+
+const kadas_centre = {move:"h6",replies:[
+	{move: "Nxh6", freq:  5000,book:[{move: "d4",replies:[
+		{move: "e4", freq:   1002,book:[{move: "Bxh6",replies:[
+			{move: "gxh6", freq: 1125,book:[{move: "e3",replies:[
+				{move: "Bg7", freq:  130,book:[{move: "c4",replies:[
+					{move: "c6", freq:  41,book:[{move: "Nc3",replies:[
+						{move: "Be6", freq:  31,book:[{move: "Nh3"}]},
+						{move: "O-O", freq:  10,book:[]},
+					]}]},
+					{move: "O-O", freq:  5,book:[]},
+				]}]},
+				{move: "Nc6", freq:  110,book:[]},
+				{move: "Be6", freq:   74,book:[]},
+				{move: "Bf5", freq:   58,book:[]},
+				{move: "c5", freq:    50,book:[]},
+			]}]},
+		]}]},
+		{move: "exd4", freq:  840,book:[]},
+		{move: "Nf5", freq:   558,book:[]},
+		{move: "Ng4", freq:   383,book:[]},
+		{move: "Nc6", freq:   276,book:[]},
+		{move: "Ng8", freq:   178,book:[]},
+	]}]},
+	{move: "g6", freq:    1492,book:[]},
+	{move: "gxh6", freq:   776,book:[]},
+	{move: "Nc6", freq:    481,book:[]},
+	{move: "Nf6", freq:    137,book:[]},
+	{move: "c5", freq:     118,book:[]},
+	{move: "e4", freq:     111,book:[]},
+]}
+
+const kadas = {move: "h4", replies:[
+	{move: "d5",freq:  106212,book:[{move: "h5",replies:[
+		{move: "h6", freq: 13670,book:[{move: "d4"}]},
+		{move: "e5", freq: 13026,book:[kadas_centre]},
+		{move: "c5", freq:  5518,book:[]},
+		{move: "Nf6", freq: 5213,book:[]},
+		{move: "c6", freq:  3860,book:[]},
+		{move: "Nc6", freq: 3706,book:[]},
+		{move: "e6", freq:  3687,book:[]},
+		{move: "Bf5", freq: 2229,book:[]},
+		{move: "Bg4", freq: 1368,book:[]},
+		{move: "d4", freq:   787,book:[]},
+	]}]},
+	{move: "e5",freq:   90407,book:[{move: "h5",replies:[
+		{move: "d5", freq: 13805,book:[kadas_centre]},
+		{move: "h6", freq:  8050,book:[{move: "d4"}]},
+		{move: "Bc5", freq: 4306,book:[]},
+		{move: "Nc6", freq: 4143,book:[]},
+		{move: "Nf6", freq: 2257,book:[]},
+		{move: "d6", freq:  1635,book:[]},
+		{move: "e4", freq:  1431,book:[]},
+		{move: "Qf6", freq:  919,book:[]},
+		{move: "f5", freq:   861,book:[]},
+	]}]},
+	{move: "e6",freq:   42768,book:[{move: "h5"}]},
+	{move: "Nf6",freq:  31615,book:[{move: "h5"}]},
+	{move: "c5",freq:   28024,book:[{move: "h5"}]},
+	{move: "h5",freq:   26535,book:[{move: "d4"}]},
+	{move: "g6",freq:   22974,book:[{move: "h5"}]},
+	{move: "c6",freq:   21481,book:[{move: "h5"}]},
+	{move: "d6",freq:   19546,book:[{move: "h5"}]},
+	{move: "b6",freq:   13408,book:[{move: "h5"}]},
+	{move: "h6",freq:   11179,book:[{move: "d4"}]},
+	{move: "Nc6",freq:   9296,book:[{move: "h5"}]},
+]}
+
+const polish_sniper = {move: "e3",replies:[
+	{move: "Nf6", freq: 42074,book:[]},
+	{move: "Bxb4",freq:  7619,book:[{move: "Bxg7",replies:[
+		{move: "Nf6",freq:  1609,book:[{move: "Bxh8",replies:[
+		]}]},
+		{move: "f6", freq:  1442,book:[{move: "Qh5+",replies:[
+			{move: "Kd7", freq: 101,book:[{move: "Bxh8"}]},
+			{move: "Ke7", freq:  62,book:[{move: "Bxh8"}]},
+		]}]},
+		{move: "Ne7", freq:  642,book:[{move: "Bxh8"}]},
+		{move: "Qg5", freq:  566,book:[{move: "Bxh8"}]},
+		{move: "Be7", freq:  513,book:[{move: "Bxh8"}]},
+		{move: "Nc6", freq:  436,book:[{move: "Bxh8"}]},
+		{move: "d4", freq:   213,book:[{move: "Bxh8"}]},
+	]}]},
+	{move: "f5",freq:    2651,book:[]},
+	{move: "c5",freq:    2546,book:[{move: "bxc5",replies:[
+		{move: "Bxc5",freq:   1728,book:[{move: "Bxg7",replies:[
+			{move: "Nf6", freq:  315,book:[{move: "Bxh8"}]},
+			{move: "f6",  freq:  261,book:[{move: "Qh5+",replies:[
+				{move: "Kd7", freq: 23,book:[{move: "Bxh8"}]},
+				{move: "Ke7", freq: 18,book:[{move: "Bxh8"}]},
+			]}]},
+			{move: "Ne7",  freq: 173,book:[{move: "Bxh8"}]},
+			{move: "Nc6",  freq: 152,book:[{move: "Bxh8"}]},
+			{move: "d4",   freq:  87,book:[{move: "Bxh8"}]},
+			{move: "Qb6",  freq:  76,book:[{move: "Bxh8"}]},
+		]}]},
+		{move: "Nf6", freq:    555,book:[]},
+		{move: "Nc6", freq:    188,book:[]},
+		{move: "Qa5", freq:     39,book:[]},
+	]}]},
+	{move: "f6",freq:    1430,book:[]},
+	{move: "c6",freq:    1174,book:[]},
+	{move: "Nc6",freq:    964,book:[]},
+	{move: "a6",freq:     858,book:[]},
+]}
+
+const polish_ultramain = [
+	{move: "d6",  freq: 9035,book:[{move: "e3"}]},
+	{move: "Nc6", freq: 2069,book:[{move: "b5",replies:[
+		{move: "Nd4",  freq: 1180,book:[{move: "e3",replies:[
+			{move: "Ne6",  freq: 449,book:[{move: "Bxe5"}]},
+			{move: "Nf5",  freq: 421,book:[{move: "Bxe5"}]},
+			{move: "Nxb5", freq: 229,book:[{move: "Bxb5"}]},
+		]}]},
+		{move: "Ne7",  freq:  146,book:[]},
+		{move: "Na5",  freq:  112,book:[]},
+		{move: "Nb8",  freq:   54,book:[]},
+		{move: "d5",   freq:   37,book:[]},
+		{move: "d6",   freq:   22,book:[]},
+	]}]},
+	{move: "d5",  freq: 1574,book:[{move: "Bxb5"}]},
+	{move: "e4",  freq: 1030,book:[{move: "c4"}]},
+];
+
+const full_orangutang = {move: "Bb2",replies:[
+	{move: "d6",freq:   187155,book:[{move: "c4",replies:[
+		{move: "Nf6",freq:  14425,book:[{move: "e3",replies:[
+			{move: "Be7", freq:  8934,book:[{move: "Nc3",replies:[
+				{move: "O-O", freq:  1229,book:[{move: "Nf3",replies:[
+					{move: "Bg4", freq: 313,book:[{move: "h3"}]},
+					{move: "c6",  freq: 249,book:[{move: "a3"}]},
+					{move: "a5",  freq: 105,book:[]},
+					{move: "b6",  freq:  89,book:[]},
+					{move: "Nc6", freq:  88,book:[]},
+					{move: "h6",  freq:  79,book:[]},
+				]}]},
+				{move: "Be6", freq:   134,book:[]},
+				{move: "c6",  freq:   124,book:[]},
+				{move: "Bf5", freq:    75,book:[]},
+				{move: "a6",  freq:    45,book:[]},
+			]}]},
+			{move: "Be6", freq:  2026,book:[]},
+			{move: "g6",  freq:  2013,book:[]},
+			{move: "Bf5", freq:  1424,book:[]},
+			{move: "Nc6", freq:   776,book:[]},
+			{move: "Nb8d7",freq:  588,book:[]},
+			{move: "a6",   freq:  538,book:[]},
+			{move: "b6",   freq:  534,book:[]},
+			{move: "c6",   freq:  522,book:[]},
+			{move: "Bg4",  freq:  511,book:[]},
+			{move: "a5",  freq:   429,book:[]},
+		]}]},
+		{move: "f5", freq:   4597,book:[]},
+		{move: "Be6", freq:  4190,book:[]},
+		{move: "g6",  freq:  2139,book:[]},
+		{move: "Bf5", freq:  1836,book:[]},
+		{move: "Nc6", freq:  1722,book:[]},
+		{move: "Be7", freq:  1502,book:[]},
+		{move: "b6",  freq:  1368,book:[]},
+		{move: "a6",  freq:  1359,book:[]},
+	]}]},
+	{move: "Bxb4",freq: 147571,book:[{move: "Bxe5",replies:[
+		{move: "Nf6",freq:  95859,book:[{move: "e3"}]},
+		{move: "f6", freq:  15681,book:[{move: "Bc3"}]},
+		{move: "Nc6", freq: 11337,book:[{move: "Bxg7"}]},
+		{move: "d6", freq:   5931,book:[{move: "Bxg7"}]},
+		{move: "Qg5", freq:  5475,book:[{move: "Nf3"}]},
+		{move: "Bf8", freq:  3418,book:[{move: "c4"}]},
+		{move: "Qe7", freq:  2097,book:[{move: "Bxg7"}]},
+	]}]},
+	{move: "Nc6",freq:   64052,book:[{move: "b5",replies:[
+		{move: "Nd4",freq:  48094,book:[{move: "e3",replies:[
+			{move: "Nxb5",  freq: 16821,book:[{move: "Bxb5"}]},
+			{move: "Nf5",  freq:  14944,book:[{move: "Bxe5"}]},
+			{move: "Ne6",  freq:  13298,book:[{move: "Bxe5"}]},
+			{move: "Nxc2+", freq:   180,book:[]},
+		]}]},
+		{move: "Nc6e7",freq: 3509,book:[{move: "Bxe5"}]},
+		{move: "Nb4",  freq: 2298,book:[{move: "c4",replies:[
+			{move: "d6",  freq: 52,book:[{move: "a3"}]},
+			{move: "d5",  freq: 50,book:[{move: "a3"}]},
+			{move: "a6",  freq: 21,book:[{move: "a3"}]},
+			{move: "Bc5", freq: 17,book:[{move: "e3"}]},
+			{move: "c6",  freq: 12,book:[{move: "a3"}]},
+			{move: "Qf6", freq: 10,book:[{move: "a3"}]},
+			{move: "Nf6", freq:  9,book:[{move: "a3"}]},
+		]}]},
+		{move: "Nb8",  freq: 2219,book:[{move: "Bxe5"}]},
+		{move: "Na5",  freq: 1869,book:[{move: "Bxe5"}]},
+	]}]},
+	{move: "f6",freq:    53398,book:[{move: "b5",replies:[
+		{move: "d5",freq:  11280,book:[{move: "d4",replies:[
+			{move: "e4", freq:  245,book:[{move: "e3",replies:[
+				{move: "Bd6",freq:  34,book:[{move: "c4"}]},
+				{move: "Be6",freq:  33,book:[{move: "c4"}]},
+				{move: "f5", freq:  31,book:[{move: "c4"}]},
+				{move: "c6", freq:  30,book:[{move: "c4"}]},
+				{move: "Bd7",freq:  17,book:[{move: "Qh5+"}]},
+				{move: "a6", freq:  15,book:[{move: "bxa6"}]},
+			]}]},
+			{move: "Bd6",freq:   56,book:[]},
+			{move: "Nd7",freq:   12,book:[]},
+			{move: "c6", freq:   12,book:[]},
+		]}]},
+		{move: "a6",freq:   2577,book:[]},
+		{move: "Bc5",freq:  2162,book:[]},
+		{move: "c6",freq:   1885,book:[]},
+		{move: "b6",freq:   1554,book:[]},
+	]}]},
+	{move: "e4",freq:    25749,book:[{move: "c4"}]},
+	{move: "Nf6",freq:   18966,book:[{move: "a3",replies: polish_ultramain}]},
+	{move: "d5",freq:    13406,book:[]},
+	{move: "Qf6",freq:   11979,book:[]},
+	{move: "Bd6",freq:    4674,book:[]},
+	{move: "Qe7",freq:    3816,book:[]},
+	{move: "Qg5",freq:    3438,book:[]},
+	{move: "f5",freq:     2206,book:[]}
+]};
+
+const polish = {move:"b4",replies:[
+	{move: "e5", freq: 638374,book:[full_orangutang,{move: "a3",replies:[
+		{move: "d5", freq:  30214,book:[{move: "Bb2",replies:[
+			{move: "Bd6",freq:  18656,book:[{move: "c4"}]},
+			{move: "d4",freq:    7662,book:[{move: "Nf3"}]},
+			{move: "f6",freq:    3847,book:[]},
+			{move: "Nc6",freq:   3017,book:[]},
+			{move: "Nd7",freq:   2576,book:[]},
+			{move: "Nf6",freq:   1909,book:[]},
+			{move: "e4",freq:     809,book:[]},
+		]}]},
+		{move: "Nf6",freq:  11370,book:[{move: "Bb2",replies: polish_ultramain}]},
+		{move: "d6",freq:    6002,book:[{move: "Bb2"}]},
+		{move: "a5",freq:    4531,book:[{move: "Bb2",replies:[
+			{move: "axb4",freq:  1388,book:[{move: "Bxe5",replies:[
+				{move: "bxa3",freq:  140,book:[{move: "Nxa3",replies:[
+					{move: "Rxa3", freq:   42,book:[{move: "Rxa3",replies:[
+						{move: "Bxa3",  freq:  39,book:[{move: "Bxg7"}]},
+						{move: "f6",    freq:   1,book:[{move: "Ra8"}]},
+						{move: "Nf6",   freq:   1,book:[{move: "Bxg6"}]},
+					]}]},
+					{move: "Nc6",  freq:   19,book:[{move: "Nb5",replies:[
+						{move: "Rxa1",   freq:  10,book:[{move: "Qxa1",replies:[
+							{move: "Nxe5",  freq:   8,book:[{move: "Qxe5+",replies:[
+								{move: "Be7",  freq:  6,book:[{move: "Nxc7+",replies:[
+									{move: "Kf8", freq:  4,book:[{move: "Nd5"}]},
+								]}]},
+								{move: "Qe7",  freq:  2,book:[{move: "Nxc7+"}]},
+							]}]},
+							{move: "Qg5",   freq:   2,book:[]},
+						]}]},
+					]}]},
+					{move: "Nf6",  freq:   12,book:[{move: "Bxc7"}]},
+					{move: "f6",   freq:    7,book:[{move: "Bxc7"}]},
+					{move: "Bxa3", freq:    6,book:[{move: "Bxg7"}]},
+				]}]},
+				{move: "Nc6", freq:   38,book:[]},
+				{move: "Nf6", freq:   19,book:[]},
+			]}]},
+			{move: "d6",freq:     156,book:[]},
+			{move: "f6",freq:      86,book:[]},
+			{move: "Nc6",freq:     23,book:[]},
+		]}]},
+		{move: "a5",freq:    3768,book:[]},
+		{move: "Nc6",freq:   2027,book:[]},
+		{move: "f5", freq:   1807,book:[]},
+		{move: "a6", freq:   1429,book:[]},
+		{move: "g6", freq:   1323,book:[]},
+		{move: "Qf6",freq:   1001,book:[]},
+		{move: "f6",freq:     864,book:[]},
+		{move: "e4",freq:     505,book:[]},
+	]}]},
+	{move: "d5", freq: 364840,book:[{move: "Bb2",replies:[
+		{move: "Nf6",freq: 83811,book:[]},
+		{move: "e6", freq: 62859,book:[polish_sniper]},
+		{move: "Bf5",freq: 32475,book:[]},
+		{move: "c6",freq:  24519,book:[]},
+		{move: "Nc6",freq: 23169,book:[]},
+		{move: "e5",freq:  17333,book:[{move: "Bxe5"}]},
+		{move: "d4",freq:  16804,book:[]},
+		{move: "f6",freq:  13018,book:[]},
+		{move: "a6",freq:   8203,book:[]},
+		{move: "Nd7",freq:  7195,book:[]},
+		{move: "Qd6",freq:  6470,book:[]},
+		{move: "Bg4",freq:  5838,book:[]},
+	]}]},
+	{move: "Nf6",freq: 240614,book:[{move: "Bb2",replies:[
+		{move: "g6", freq: 74043,book:[{move: "Nf3"}]},
+		{move: "e6", freq: 68828,book:[{move: "a3"}]},
+		{move: "d5", freq: 27625,book:[{move: "Nf3"}]},
+		{move: "d6", freq: 17818,book:[{move: "c4"}]},
+		{move: "e5", freq:  6126,book:[{move: "a3"}]},
+		{move: "Nc6",freq:  2929,book:[]},
+		{move: "a5", freq:  2655,book:[]},
+		{move: "b6", freq:  2588,book:[]},
+		{move: "c6", freq:  2424,book:[]},
+	]}]},
+	{move: "e6", freq: 228499,book:[{move: "Bb2",replies:[
+		{move: "Nf6", freq: 85827,book:[{move: "a3"}]},
+		{move: "d5", freq:  60009,book:[polish_sniper]},
+		{move: "Bxb4", freq: 9485,book:[{move: "Bxg7"}]},
+		{move: "b6",  freq:  6240,book:[]},
+		{move: "d6",  freq:  5256,book:[]},
+		{move: "f6",  freq:  4149,book:[]},
+		{move: "f5",  freq:  3987,book:[]},
+	]}]},
+	{move: "g6", freq:  94823,book:[]},
+	{move: "c6", freq:  88096,book:[]},
+	{move: "d6", freq:  64287,book:[]},
+	{move: "c5", freq:  59376,book:[]},
+	{move: "b6", freq:  50359,book:[]},
+	{move: "a5", freq:  47609,book:[]},
+	{move: "f5", freq:  21056,book:[]},
+	{move: "b5", freq:  16878,book:[]},
+]}
+
 const hoh_c_variation = [{move: "d4",replies:[//c variation
 	{move: "exd4", freq: 59736,book:[{move: "O-O",replies:[
 		{move: "dxc3",  freq: 14892,book:[{move: "Bxf7+",replies:[
@@ -174,26 +723,9 @@ const scotch_d6 = {move: "d5",replies:[
 	{move: "Bg4",      freq:   1354,book:[]},
 ]}
 
-const philidor = [//philidor
+const philidor = [//philidor defence
 	{move: "exd4", freq:666899,book:[{move: "Nxd4",replies:[
-		{move: "Nf6", freq: 183969,book:[{move: "Nc3",replies:[
-			{move: "Be7", freq:  92038,book:[{move: "Bf4",replies:[
-				{move: "O-O", freq:  4458,book:[{move: "Qd2",replies:[
-					{move: "c5", freq: 492,book:[{move: "Nd4b5",replies:[
-						{move: "a6", freq: 108,book:[{move: "Nxd6"}]},
-						{move: "Nc6", freq: 32,book:[]},
-					]}]},
-					{move: "a6", freq: 297,book:[]},
-					{move: "Nc6", freq:281,book:[]},
-				]}]},
-				{move: "Bd7", freq:   384,book:[]},
-				{move: "c5", freq:    345,book:[]},
-				{move: "a6", freq:    279,book:[]},
-			]}]},
-			{move: "c5", freq:   16145,book:[{move: "Bb5+"}]},
-			{move: "Bd7", freq:  11366,book:[]},
-			{move: "Nc6", freq:   9950,book:[]},
-		]}]},
+		{move: "Nf6", freq: 183969,book:[{move: "Nc3",replies:main_philidor}]},
 		{move: "c5", freq:   81720,book:[{move: "Ne2",stock:1.08,replies:[
 			{move: "Nc6", freq: 1357,book:[{move: "Nf4",stock:1.03	}]},
 			{move: "Nf6", freq:  685,book:[]},
@@ -221,7 +753,14 @@ const philidor = [//philidor
 		{move: "a6", freq:   10971,book:[]},
 	]}]},
 	{move: "Bg4", freq: 211540,book:[{move: "Nc3",replies:[
-		{move: "Bxf3", freq: 4087,book:[{move: "gxf3"}]},
+		{move: "Bxf3", freq: 4087,book:[{move: "gxf3",replies:[
+			{move: "exd4", freq: 2371,book:[{move: "Qxd4"}]},
+			{move: "Nc6",  freq:  430,book:[]},
+			{move: "Nf6",  freq:  385,book:[]},
+			{move: "Qf6",  freq:  210,book:[]},
+			{move: "Nd7",  freq:  189,book:[]},
+			{move: "f6",   freq:  116,book:[]},
+		]}]},
 		{move: "exd4", freq: 3329,book:[{move: "Qxd4"}]},
 		{move: "Nc6", freq:  1343,book:[{move: "Bb5"}]},
 		{move: "Nf6", freq:   631,book:[]},
@@ -282,8 +821,8 @@ const horse_cumsock = [
 			{move: "Bxc3+",  freq:   74,book:[]},
 		]}]},
 		{move: "Qa5",  freq:      2748,book:[{move: "Bd2",stock:2.08}]},
-		{move: "Bxc3+",  freq:    2012,book:[]},
-		{move: "Qb6",  freq:      1662,book:[]},
+		{move: "Bxc3+",  freq:    2012,book:[{move: "bxc3"}]},
+		{move: "Qb6",  freq:      1662,book:[{move: "Bd3"}]},
 		{move: "f6",  freq:        771,book:[]},
 		{move: "a6",  freq:        595,book:[]},
 		{move: "Bd7",  freq:       511,book:[]},
@@ -311,13 +850,29 @@ const french_cumsock = [
 	{move: "f6",  freq:    3494,book:[]},
 ];
 
+const french_closed_rook = {move: "Be2",replies:[
+	{move: "Ne7",  freq:  1012,book:[{move: "h4",replies:[
+		{move: "h6",  freq: 22,book:[{move: "h5"}]},
+		{move: "Qc7", freq: 15,book:[]},
+		{move: "Nc8", freq: 11,book:[]},
+	]}]},
+	{move: "Nb3",  freq:   363,book:[{move: "Nxb3",replies:[
+		{move: "Ba4",  freq: 231,book:[{move: "Nf3d2"}]},
+		{move: "cxb3", freq:  52,book:[{move: "Ra1"}]},
+		{move: "Qxb3", freq:  13,book:[{move: "Qxb3"}]},
+	]}]},
+	{move: "O-O-O",  freq: 198,book:[]},
+	{move: "Qc7",    freq: 189,book:[]},
+	{move: "h6",    freq:  133,book:[]},
+]}
+
 const french_queen_a3 = [{move: "a3",replies:[
-	{move: "cxd4", freq:  11530,master:50,book:[{move: "cxd4",replies: french_queen_a3_afterPawn}]},
-	{move: "Bd7", freq:    7732,master:545,book:[{move: "b4",replies:[
+	{move: "cxd4", freq:  53026,master:50,book:[{move: "cxd4",replies: french_queen_a3_afterPawn}]},
+	{move: "Bd7", freq:   48435,master:545,book:[{move: "b4",replies:[
 		{move: "cxd4", freq: 38067,book:[{move: "cxd4",replies:[
 			{move: "Ng8e7", freq:  15637,book:[{move: "Nc3"}]},
 			{move: "Rc8", freq:    14316,book:[{move: "Be3"}]},
-			{move: "a5", freq:      5934},
+			{move: "a5", freq:      5934,book:[{move: "b5"}]},
 			{move: "a6", freq:      5912},
 			{move: "f6", freq:      2692},
 			{move: "Nh6", freq:     2239},
@@ -325,7 +880,25 @@ const french_queen_a3 = [{move: "a3",replies:[
 		{move: "cxb4", freq:  4805,book:[{move: "axb4"}]},
 		{move: "c4", freq:    2874,book:[{move: "a4"}]},
 	]}]},
-	{move: "Ng8e7", freq:  7524,master:57,book:[{move: "dxc5",replies:[
+	{move: "c4", freq:   43295,master:1447,book:[{move: "Nb1d2",replies:[
+		{move: "Na5", freq: 15289,book:[{move: "Rb1",replies:[
+			{move: "Bd7", freq:  3118,book:[french_closed_rook]},
+			{move: "Nb3", freq:   146},
+			{move: "Qc7", freq:   113},
+		]}]},
+		{move: "Bd7", freq:  3583,book:[{move: "Rb1",replies:[
+			{move: "Na5", freq:  438,book:[french_closed_rook]},
+			{move: "Ng8e7", freq: 24},
+		]}]},
+		{move: "f6",  freq:  1915},
+	]}]},
+	{move: "Nh6", freq:  34355 ,master:1282,book:[{move: "Bd3",stock:0.19,replies:[
+		{move: "cxd4", freq: 2809},
+		{move: "Bd7", freq:  1752},
+		{move: "Nf5", freq:  1046},
+		{move: "c4",  freq:   136},
+	]}]},
+	{move: "Ng8e7", freq: 28777,master:57,book:[{move: "dxc5",replies:[
 		{move: "Qxc5", freq: 432,book:[{move: "b4",replies:[{move: "Qb6", freq: 1,book:[{move: "c4",replies: [
 			{move: "dxc4", freq:  129,book:[{move: "Nb1d2",replies:[
 				{move: "c3", freq:  40,book:[{move: "Nc4",replies:[
@@ -355,22 +928,54 @@ const french_queen_a3 = [{move: "a3",replies:[
 		]}]}]}]},
 		{move: "Qc7", freq:   19},
 	]}]},
-	{move: "Nh6", freq:    4605,master:1282,book:[{move: "Bd3",stock:0.19}]},
-	{move: "a5", freq:     3177,master:227,book:[{move: "Bd3"}]},
-	{move: "c4", freq:     3142,master:1447,book:[{move: "Nb1d2"}]},
+	{move: "a5", freq:  28423,master:227,book:[{move: "Bd3"}]},
+	{move: "f6", freq:   9496,book:[{move: "Bd3"}]},
 ]}];
 
 const french_queen = [
-	{move: "Qb6", freq: 207357,master:3720,book:french_queen_a3},
-	{move: "Bd7", freq:  60811,master:3787,book:[{move: "Be2",replies:[
-		{move: "Qb6", freq:  5177,book:[{move: "O-O"}]},
+	{move: "Qb6", freq: 753503,master:3720,book:french_queen_a3},
+	{move: "Bd7", freq: 307850,master:3787,book:[{move: "Be2",replies:[
+		{move: "Qb6", freq:  5177,book:[{move: "O-O",replies:[
+			{move: "cxd4",freq:  18934,book:[{move: "cxd4"}]},
+			{move: "Ng8e7",freq: 13499,book:[{move: "dxc5"}]},
+			{move: "Rc8",freq:    9294,book:[{move: "dxc5"}]},
+			{move: "Nh6",freq:    5903},
+		]}]},
 		{move: "Ng8e7", freq:3138,book:[{move: "O-O"}]},
 		{move: "cxd4", freq: 2203,book:[{move: "cxd4"}]},
 		{move: "Rc8", freq:  1278,book:[{move: "O-O"}]},
 	]}]},//euwe
-	{move: "cxd4", freq: 54313,master:80,book:[{move: "cxd4",replies:horse_cumsock}]},
-	{move: "Ng8e7", freq:41043,master:590,book:[{move: "Na3"}]},
-	{move: "a6", freq:    8808,master:3},
+	{move: "cxd4", freq:186121,master:80,book:[{move: "cxd4",replies:horse_cumsock}]},
+	{move: "Ng8e7",freq:163905,master:590,book:[{move: "Na3",replies:[
+		{move: "Nf5", freq:  3583,book:[{move: "Nc2"}]},
+		{move: "cxd4",freq:  2342,book:[{move: "cxd4"}]},
+		{move: "a6",freq:    1391,book:[{move: "Nc2"}]},
+		{move: "Ng6",freq:   1345,book:[{move: "h4"}]},
+		{move: "Bd7",freq:    351},
+		{move: "Qb6",freq:    321},
+	]}]},
+	{move: "f6", freq:   30496,book:[{move: "Bb5"}]},
+	{move: "a6", freq:   26517,master:3,book:[{move: "Bd3"}]},
+	{move: "Nh6", freq:  18732,book:[{move: "Bxh6"}]},
+	{move: "Qa5", freq:  15884,book:[{move: "dxc5"}]},
+	{move: "c4", freq:   12667},
+	{move: "Be7", freq:  11341},
+	{move: "Qc7", freq:  10265},
+	{move: "b6", freq:    9773},
+	{move: "h6", freq:    9393,book:[{move: "Bd3",replies:[
+		{move: "cxd4", freq:  530,book:[{move: "cxd4"}]},
+		{move: "Ng8e7", freq: 475,book:[{move: "O-O",replies:[
+			{move: "Nf5",  freq: 252,book:[{move: "dxc5"}]},
+			{move: "cxd4", freq: 116,book:[{move: "cxd4"}]},
+			{move: "c4",   freq:  88,book:[{move: "dxc5"}]},
+			{move: "Ng6",  freq:  80},
+			{move: "Qb6",  freq:  61},
+		]}]},
+		{move: "c4",    freq: 377,book:[{move: "Bc2"}]},
+		{move: "Qb6",   freq: 343},
+		{move: "Bd7",   freq: 329},
+		{move: "a6",    freq: 318},
+	]}]},
 ];
 
 const mainline_french = [
@@ -401,12 +1006,29 @@ const mainline_french = [
 const cumsock_invitation = [
 	{move: "d5",    freq:  42742,book:[{move: "e5", replies: horse_cumsock}]},
 	{move: "Nf6",    freq: 20688,book:[{move: "Nc3",stock:0.88,replies:[
-		{move: "Bb4",    freq:   20822,book:[{move: "Bd3"}]},
-		{move: "d5",     freq:    5202},
+		{move: "Bb4",    freq:   20822,book:[{move: "Bd3",replies:[
+			{move: "O-O", freq:  10041,book:[{move: "e5",replies:[
+				{move: "Nd5",  freq:  562,book:[{move: "Bxh7+",replies:[
+					{move: "Kxh7",  freq: 245,book:[{move: "Ng5+",replies:[
+						{move: "Kg6",  freq:  138,book:[{move: "h4"}]},
+						{move: "Kg8",  freq:   93,book:[{move: "Qh5"}]},
+						{move: "Qxg5",  freq:  13,book:[{move: "Bxg5"}]},
+					]}]},
+					{move: "Kh8",   freq:  92,book:[{move: "Ng5"}]},
+				]}]},
+				{move: "Nd5",  freq:   24},
+				{move: "Bxc3+",freq:   15},
+				{move: "Ng4",  freq:    6},
+			]}]},
+			{move: "d5",  freq:   6109,book:[{move: "e5"}]},
+			{move: "Qb6", freq:   2739},
+			{move: "Qa5", freq:   1951},
+		]}]},
+		{move: "d5",     freq:    5202,book:[{move: "e5"}]},
 		{move: "Be7",    freq:    2940},
 	]}]},
 	{move: "Bb4+",   freq: 14423,book:[{move: "Nc3"}]},
-	{move: "d6",    freq:   9116},
+	{move: "d6",    freq:   9116,book:[{move: "Nc3"}]},
 ];
 
 const ala_main = [
@@ -421,6 +1043,16 @@ const ala_main = [
 		{move: "Qa5+",    freq:   67},
 	]}
 ];
+
+const sicilian_rat = {move: "Nf3",replies:[
+	{move: "Nf6",    freq:  34233,book:[{move: "Bd3"}]},
+	{move: "a6",    freq:   15282,book:[{move: "Bd3"}]},
+	{move: "Nc6",   freq:   10468,book:[{move: "Nc3"}]},
+	{move: "Be7",   freq:    9855,book:[{move: "Bd3"}]},
+	{move: "d5",    freq:    2369},
+	{move: "g6",    freq:    2322},
+	{move: "Nd7",   freq:    2107},
+]};
 
 const hoh_sicilian = [
 	{move: "c3",replies:[
@@ -465,7 +1097,24 @@ const hoh_sicilian = [
 					{move: "Nb8",  freq:  1106,stock:1.98},
 					{move: "Nb4",  freq:   112,stock:7.59},
 				]}]},
-				{move: "g6",  freq:    15633},
+				{move: "g6",  freq:    15633,book:[{move: "d5",replies:[
+					{move: "Nb8",  freq:  6651,book:[{move: "Qd4",replies:[
+						{move: "Nf6",  freq:  810,book:[{move: "e5",replies:[
+							{move: "Nh5",  freq: 307,book:[{move: "Nc3"}]},
+							{move: "Ng8",  freq: 298,book:[{move: "Nf3"}]},
+							{move: "Qa5+", freq: 139,book:[{move: "Bd2",replies:[
+								{move: "Qxd5",  freq:    15,book:[{move: "Qc3"}]},
+							]}]},
+						]}]},
+						{move: "f6",   freq:  617,book:[{move: "Nf3"}]},
+						{move: "Bg7",  freq:  104,book:[{move: "Qxg7"}]},
+						{move: "d6",   freq:   67,book:[{move: "Qxh8"}]},
+					]}]},
+					{move: "Ne5",  freq:  6649,book:[{move: "f4"}]},
+					{move: "Nb4",  freq:   544,book:[{move: "Nc3"}]},
+					{move: "Bg7",  freq:   234,book:[{move: "dxc6"}]},
+					{move: "Na5",  freq:   180,book:[{move: "Qd4"}]},
+				]}]},
 				{move: "e5",  freq:    10854,book:[{move: "dxe5",replies:[
 					{move: "Nxe5",  freq:  1042,book:[{move: "Nc3"}]},
 					{move: "Qa5+",  freq:    78},
@@ -501,12 +1150,19 @@ const hoh_sicilian = [
 					{move: "e5",  freq:  1339},
 				]}]},
 				{move: "Nc6",  freq: 18375,book:[{move: "d5",replies:[
-					{move: "Ne5",  freq:  8992,book:[{move: "Nc3"}]},
-					{move: "Nb8",  freq:  1106},
+					{move: "Ne5",  freq:  8992,book:[{move: "Nc3",replies:[
+						{move: "Nf6",  freq:  1888,book:[{move: "f4"}]},
+						{move: "g6",   freq:   952,book:[{move: "f4"}]},
+						{move: "e6",   freq:   392,book:[{move: "f4"}]},
+						{move: "a6",   freq:   380,book:[{move: "f4"}]},
+						{move: "Ng6",  freq:   230},
+						{move: "Bd7",  freq:   205},
+					]}]},
+					{move: "Nb8",  freq:  1106,book:[{move: "Nf3"}]},
 					{move: "Nb4",  freq:   112},
 				]}]},
-				{move: "e6",  freq:  15370,book:[{move: "Nf3"}]},
-				{move: "g6",  freq:  10442},
+				{move: "e6",  freq:  15370,book:[sicilian_rat]},
+				{move: "g6",  freq:  10442,book:[{move: "Nc3"}]},
 				{move: "a6",  freq:   6383,stock:1.41},
 				{move: "e5",  freq:   3447},
 				{move: "Nd7",  freq:  1208},
@@ -530,10 +1186,10 @@ const hoh_sicilian = [
 			{move: "cxd4",  freq:  91298,book:[{move: "cxd4",replies:[
 				{move: "d5",  freq:    27053,book:[{move: "e5",replies:french_cumsock}]},
 				{move: "Nc6",  freq:   18631,book:ala_main},
-				{move: "Nf6",  freq:   10389,stock:1.12},
-				{move: "a6",  freq:     8788},
-				{move: "Bb4+",  freq:   6807},
-				{move: "d6",  freq:     6679,book:[{move: "Nf3"}]},
+				{move: "Nf6",  freq:   10389,stock:1.12,book:[{move: "Nc3"}]},
+				{move: "a6",  freq:     8788,book:[{move: "Nf3"}]},
+				{move: "Bb4+",  freq:   6807,book:[{move: "Nc3"}]},
+				{move: "d6",  freq:     6679,book:[sicilian_rat]},
 			]}]},
 			{move: "d5",  freq:    33833,book:[{move: "e5",replies:mainline_french}]},
 			{move: "Nc6",  freq:   14068,book:[{move: "Nf3",replies:[
@@ -595,7 +1251,23 @@ const hoh_sicilian = [
 		]}]},
 		{move: "g6",  freq:   31252,master:1178,book:[{move: "d4",replies:[
 			{move: "cxd4",  freq:   21376,book:[{move: "cxd4",replies:[
-				{move: "Bg7",  freq:   16587,book:[{move: "Nc3"}]},
+				{move: "Bg7",  freq:   16587,book:[{move: "Nc3",replies:[
+					{move: "d6",  freq:  9015,book:[{move: "h3"}]},
+					{move: "Nc6", freq:  5415,book:[{move: "d5",replies:[
+						{move: "Ne5", freq:  700,book:[{move: "f4"}]},
+						{move: "Nb8", freq:  699,book:[{move: "d6",replies:[
+							{move: "exd6", freq:  11,book:[{move: "Nb5"}]},
+							{move: "e6",   freq:   7,book:[{move: "Nb5"}]},
+							{move: "Nc6",  freq:   6,book:[{move: "Nb5"}]},
+						]}]},
+						{move: "Nd4", freq:  172},
+						{move: "Nb4", freq:   91},
+					]}]},
+					{move: "e6",  freq:  2879},
+					{move: "Nf6", freq:  2064},
+					{move: "d5",  freq:  1092},
+					{move: "a6",  freq:   457},
+				]}]},
 				{move: "d5",  freq:     4808,book:[{move: "e5",stock:0.91}]},
 			]}]},
 			{move: "Bg7",  freq:     3558},
@@ -692,11 +1364,11 @@ const scandinavian = [{move: "exd5",replies:[//scandinavian
 								{move: "Qa6", freq: 249,book:[{move: "Bf4"}]},
 								{move: "Qb4", freq:  55,book:[{move: "a3"}]},
 							]}]},
-							{move: "c6", freq:     445},
-							{move: "e6", freq:     412},
+							{move: "c6", freq:     445,book:[{move: "h4"}]},
+							{move: "e6", freq:     412,book:[{move: "Nc4"}]},
 							{move: "Nc6", freq:     81},
 							{move: "Be4", freq:     76},
-							{move: "Ne4", freq:     52},
+							{move: "Ne4", freq:     52,book:[{move: "Qf3"}]},
 						]}]},
 						{move: "Nxg4", freq:  45},
 					]}]},
@@ -746,7 +1418,7 @@ const scandinavian = [{move: "exd5",replies:[//scandinavian
 			{move: "Bg4",    freq:  75552,book:[{move: "d4",stock:0.96}]},
 			{move: "Nc6",    freq:  13172,book:[{move: "Nf3",stock:2.28}]},
 			{move: "c6",    freq:   11489},
-			{move: "Nf5",    freq:   8900},
+			{move: "Bf5",    freq:   8900},
 			{move: "Nf6",    freq:   8659},
 			{move: "e6",     freq:   6510},
 			{move: "Qg5",     freq:  5780},
@@ -1220,7 +1892,7 @@ const italian = {move: "Bc4",replies:[
 									]}]},
 									{move: "Bg4", freq:   277,book:[{move: "Qf1",stock:3.32}]},
 									{move: "d5", freq:     66},
-									{move: "Ng4+", freq:   64},
+									{move: "Ng4+", freq:   64,book:[{move: "Kg1"}]},
 								]}]},
 								{move: "Qxd6", freq:  219,master:3,book:[{move: "Nf7",stock:0.99,replies:[
 									{move: "Qc5", freq: 198,book:[{move: "d3"}]},
@@ -1316,7 +1988,7 @@ const italian = {move: "Bc4",replies:[
 						{move: "Nh7", freq:1638,book:[{move: "Nc3"}]},
 						{move: "c5", freq:  777,book:[{move: "exf6"}]},
 					]}]},
-					{move: "c5", freq:  3476,book:[]},
+					{move: "c5", freq:  3476,book:[{move: "Qf4"}]},
 					{move: "Nh7", freq: 2994,book:[]},
 				]}]},
 				{move: "Qf6", freq: 13290,book:[{move: "e5"}]},
@@ -1326,7 +1998,7 @@ const italian = {move: "Bc4",replies:[
 			{move: "Ne5", freq:  20826,book:[{move: "Bb3"}]},
 			{move: "Nf6", freq:  15963,book:[{move: "Nc3"}]},
 			{move: "Qf6", freq:  14525,book:[{move: "Nb5"}]},
-			{move: "d6", freq:    8904,book:[]},
+			{move: "d6", freq:    8904,book:[{move: "O-O"}]},
 		]}]},
 		{move: "d6", freq:    30220,book:[{move: "dxe5"}]},
 		{move: "Bd6", freq:   10285,book:[{move: "dxe5",replies:[
@@ -1349,11 +2021,21 @@ const italian = {move: "Bc4",replies:[
 			{move: "Nxd4", freq:   36683,book:[{move: "Qxd4",stock:0.96}]},
 			{move: "Nf6", freq:    11117,book:[{move: "Nc3",stock: 0.70}]},
 			{move: "Bd7", freq:     6698,book:[]},
-			{move: "Ne5", freq:     6359,book:[]},
+			{move: "Ne5", freq:     6359,book:[{move: "Bb3"}]},
 		]}]},
-		{move: "Bg4", freq:    34166,book:[{move: "h3"}]},
-		{move: "h6", freq:      8846,book:[]},
-		{move: "Nf6", freq:     7725,book:[]},
+		{move: "Bg4", freq:    34166,book:[{move: "h3",replies:[
+			{move: "Bxf3", freq:  6948,book:[{move: "Qxf3",replies:[
+				{move: "Nf6",  freq:  3259,book:[{move: "d5"}]},
+				{move: "Qf6",  freq:  1871,book:[{move: "Qb3"}]},
+				{move: "Nxd4", freq:   673,book:[{move: "Qxf7#"}]},
+				{move: "Qe7",  freq:   238,book:[]},
+				{move: "f6",   freq:   198,book:[]},
+				{move: "exd4", freq:    66,book:[{move: "Qxf7#"}]},
+			]}]},
+			{move: "Bh5",  freq:  4663,book:[{move: "g4"}]},
+		]}]},
+		{move: "h6", freq:      8846,book:[{move: "dxe5"}]},
+		{move: "Nf6", freq:     7725,book:[{move: "d5"}]},
 	]}]},
 	{move: "Nd4",  freq:  360526,book:[{move: "Nxd4",replies:[
 		{move: "exd4", freq: 138728,book:[{move: "O-O",replies:[
@@ -1383,11 +2065,11 @@ const italian = {move: "Bc4",replies:[
 	{move: "f5", freq:    44523,book:[{move: "d4"}]},
 	{move: "f6", freq:    42942,book:[{move: "d4",replies:[
 		{move: "exd4", freq:  7845,book:[{move: "O-O"}]},
-		{move: "d6", freq:    5211,book:[]},
+		{move: "d6", freq:    5211,book:[{move: "O-O"}]},
 	]}]},
 	{move: "a6", freq:    42893,book:[{move: "d4"}]},
 	{move: "Qf6", freq:   33915,book:[{move: "Nc3"}]},
-	{move: "g6", freq:    18616,book:[]},
+	{move: "g6", freq:    18616,book:[{move: "d4"}]},
 	{move: "Bb4", freq:   15044,book:[{move: "c3"}]},
 ]};
 
@@ -2103,10 +2785,11 @@ const hoh_kingKnight =
 				{move: "d5", freq:    12802,book:[]}
 			]},//spansk
 			ponziani,
-			scotch
+			scotch,
+			fork_nights
 		]},
 		{move: "d6",  freq: 3680148,master:5939,book:[{move: "d4",replies:philidor}]},
-		{move: "Nf6", freq: 2227800,master:26105,book:[modern_attack,classical_attack]},
+		{move: "Nf6", freq: 2227800,master:26105,book:[modern_attack,classical_attack,russian_nights]},
 		{move: "Bc5",  freq: 523105,book:[{move: "Nxe5",replies:[//Busch-Gass gambit
 			{move: "Bxf2+", freq:   16517,book:[{move: "Kxf2",replies:[
 				{move: "Qh4+", freq:   9508,book:[{move: "Kg1",replies:[
@@ -2659,7 +3342,11 @@ const caro_kahn = [{move: "d4",replies:[//caro-kann
 							{move: "Bxc5",   freq:  2,book:[{move: "Nxc5"}]},
 						]}]},
 						{move: "Ne7",   freq: 26,book:[{move: "Ng3",replies:ultra_crab}]},
-						{move: "h6",   freq:  14,book:[{move: "Ng3"}]},
+						{move: "h6",   freq:  14,book:[{move: "Ng3",replies:[
+							{move: "Bh7",   freq:  14,book:[{move: "Be2"}]},
+							{move: "Bg6",   freq:   3},
+							{move: "Ne7",   freq:   2},
+						]}]},
 					]},{move: "Nf3",replies:[
 							{move: "c5",   freq: 205,book:[{move: "dxc5",replies:[
 								{move: "Nxc5",   freq: 56,book:[{move: "Bg5",replies:[
@@ -2680,7 +3367,7 @@ const caro_kahn = [{move: "d4",replies:[//caro-kann
 					]},
 					{move: "Ne7",   freq: 1773,book:[{move:"Ne2",replies:[
 						{move: "Nd7",   freq:  22,book:[{move: "Ng3",replies:ultra_crab}]},
-						{move: "Bg6",   freq:  8},
+						{move: "Bg6",   freq:  8,book:[{move: "Nf4"}]},
 					]},{move: "Nf3",replies:[
 						{move: "Nd7",   freq: 875,book:[{move: "Be2",replies:weird_caro}]},//double knight
 						{move: "h6",   freq:  236,book:[{move: "Be2"}]},
@@ -2723,19 +3410,58 @@ const caro_kahn = [{move: "d4",replies:[//caro-kann
 				{move: "Nd7",   freq:  91,book:[{move: "Ng1f3"}]},
 			]}]},
 			{move: "c5",   freq:  111809,book:[{move: "Nf3",replies:[
-				{move: "Bg4",   freq:    6634,book:[{move: "dxc5",replies:[
+				{move: "Nc6",   freq:    25140,book:[{move: "dxc5",replies:[
+					{move: "Bg4",  freq:  37466,book:[{move: "c3",replies:[
+						{move: "e6",  freq:  7338,book:[{move: "Be3"}]},
+						{move: "Bxf3",freq:  1844,book:[{move: "Qxf3"}]},
+						{move: "Nxe5",freq:  1395, book:[{move: "Nxe5",replies:[
+							{move: "Bxd1",  freq:  718,book:[{move: "Bb5+",replies:[
+								{move: "Qd7",    freq:  632,book:[{move: "Bxd7+",replies:[
+									{move: "Kd8",    freq:  586,replies:[{move: "Nxf7+"}]},
+								]}]},
+							]}]},
+							{move: "Bd7",    freq:   33},
+						]}]},
+						{move: "a5",  freq:   231},
+						{move: "a6",  freq:   139},
+					]}]},
+					{move: "e6",   freq:   7224},
+					{move: "Bf5",   freq:  1240},
+					{move: "Qa5+",  freq:   498},
+				]}]},
+				{move: "Bg4",   freq:    19704,book:[{move: "dxc5",replies:[
 					{move: "e6",    freq: 1519,book:[{move: "Bb5+",replies:[
 						{move: "Nc6",  freq: 193,book:[{move: "b4"}]},
 						{move: "Nd7",  freq: 53, book:[{move: "b4"}]},
 					]}]},
-					{move: "Nc6",   freq: 1264,book:[{move: "c3"}]},
+					{move: "Nc6",   freq: 1264,book:[{move: "c3",replies:[
+						{move: "e6",  freq:  7338,book:[{move: "Be3"}]},
+						{move: "Bxf3",freq:  1844,book:[{move: "Qxf3"}]},
+						{move: "Nxe5",freq:  1395, book:[{move: "Nxe5",replies:[
+							{move: "Bxd1",  freq:  718,book:[{move: "Bb5+",replies:[
+								{move: "Qd7",    freq:  632,book:[{move: "Bxd7+",replies:[
+									{move: "Kd8",    freq:  586,replies:[{move: "Nxf7+"}]},
+								]}]},
+							]}]},
+							{move: "Bd7",    freq:   33},
+						]}]},
+						{move: "a5",  freq:   231},
+						{move: "a6",  freq:   139},
+					]}]},
 					{move: "Bxf3",  freq:  173,book:[{move: "Qxf3"}]},
 				]}]},
-				{move: "cxd4",   freq:   6559,book:[{move: "Nxd4"}]},
-				{move: "e6",    freq:    1938,book:[{move: "c3",stock:0.76}]},//lmao, delayed french
+				{move: "cxd4",   freq:   25140,book:[{move: "Nxd4"}]},
+				{move: "e6",    freq:    5390,book:[{move: "c3",stock:0.76}]},//lmao, delayed french
 			]}]},
 			{move: "e6",   freq:   68029,book:[{move: "c3",replies:[
-				{move: "c5",   freq: 6129,book:[{move: "Nf3"}]},
+				{move: "c5",   freq: 6129,book:[{move: "Nf3",replies:[
+					{move: "Nc6",  freq: 55174,book:[{move: "Bd3",replies:[
+						{move: "Qb6",   freq:  5834},
+					]}]},
+					{move: "cxd4", freq: 27953,book:[{move: "cxd4"}]},
+					{move: "c4",   freq:  6908},
+					{move: "Qb6",  freq:  3974},	
+				]}]},
 				{move: "Ne7",  freq: 1708},
 				{move: "Nd7",  freq: 1619},
 				{move: "f6",  freq:  1110},
@@ -2765,7 +3491,7 @@ const double_fia = [
 		]}]},
 	]}]},
 	{move: "Nc6",  freq:  351,book:[{move: "d5"}]},
-	{move: "h6",  freq:   190,book:[]},
+	{move: "h6",  freq:   190,book:[{move: "hxg6"}]},
 	{move: "c5",  freq:   100,book:[]},
 ];
 
@@ -2811,13 +3537,20 @@ const pirc_d6_modern = [
 const owen_e6 = {move: "Bd3",replies:[
 	{move: "Bb4", freq:   22590,book:[{move: "Ng1e2",stock:0.81,replies:[
 		{move: "Nf6", freq:  13322,book:[{move: "a3",replies:[
-			{move: "Bxc3+", freq: 1515,book:[{move: "Nxc3"}]},
+			{move: "Bxc3+", freq: 1515,book:[{move: "Nxc3",replies:[
+				{move: "d5",  freq: 681,book:[{move: "e5"}]},
+				{move: "O-O", freq: 275,book:[{move: "Bg5"}]},
+				{move: "d6",  freq: 215},
+				{move: "c5",  freq: 172},
+				{move: "Nc6", freq: 145},
+				{move: "h6",  freq: 107},
+			]}]},
 			{move: "Be7",  freq:   547},
 		]}]},
 		{move: "Bxc3+", freq: 2701},
 		{move: "Ne7", freq:   2179},
 	]}]},
-	{move: "Nf6", freq:    9224,stock:1.20},
+	{move: "Nf6", freq:    9224,stock:1.20,book:[{move: "Ng1e2"}]},
 	{move: "d5", freq:     2761},
 ]}
 
@@ -2826,6 +3559,7 @@ const deep_wayward = {move: "a3",replies:[
 		{move: "Qd7", freq: 21,book:[{move: "Qh4",replies:[
 			{move: "Nd4",freq:   1,book:[{move: "Nxd4"}]},
 			{move: "Be6",freq:   1,book:[{move: "Be6"}]},
+			{move: "Bxe2",freq:  1,book:[{move: "Nxd2"}]},
 		]}]},
 		{move: "Bxe2",freq: 20,book:[{move: "Nxe2",replies:[
 			{move: "a6",freq: 10,book:[{move: "h4"}]},
@@ -2843,56 +3577,318 @@ const deep_wayward = {move: "a3",replies:[
 	{move: "h6", freq:    2},
 ]};
 
+const deep_wayward_alt_long = [
+	{move: "Nb4",  freq: 63,book:[{move: "O-O-O"}]},
+	{move: "Nd7",  freq: 51,book:[{move: "O-O-O"}]},
+	{move: "Kh7",  freq: 37,book:[{move: "O-O-O"}]},
+	{move: "Ne7",  freq: 30,book:[{move: "g4"}]},
+	{move: "a6",   freq: 25,book:[{move: "Rd1"}]},
+	{move: "Qd7",  freq: 19,book:[{move: "O-O-O"}]},
+	{move: "Qe7",  freq: 18,book:[{move: "O-O-O"}]},
+	{move: "Nh7",  freq: 18,book:[{move: "O-O-O"}]},
+	{move: "Nh5",  freq: 12,book:[{move: "O-O-O"}]},
+	{move: "Re8",  freq:  9,book:[{move: "O-O-O"}]},
+]
+
+const deep_wayward_alt = {move: "h3",replies:[
+	{move: "Be6", freq:  2794,book:[{move: "Bg5",replies:[
+		{move: "Bxc4", freq: 1517,book:[{move: "dxc4",replies:[
+			{move: "h6",   freq: 839,book:[{move: "Be3",replies: deep_wayward_alt_long}]},
+			{move: "Nd4",  freq: 365,book:[{move: "Nxd4",replies:[
+				{move: "exd4", freq:   363,book:[{move: "Nd5",replies:[
+					{move: "Re8",  freq: 132,book:[{move: "Bxf6"}]},
+					{move: "c6",   freq: 112,book:[{move: "Nxf6+"}]},
+					{move: "h6",   freq:  39,book:[{move: "Nxf6+"}]},
+					{move: "Nxd5", freq:  18,book:[{move: "Bxd8"}]},
+					{move: "c5",   freq:  16,book:[{move: "Nxf6+"}]},
+					{move: "Qd7",  freq:  12,book:[{move: "Bxf6"}]},
+				]}]},
+			]}]},
+			{move: "Nb4",  freq: 229,book:[{move: "O-O-O"}]},
+			{move: "Re8",  freq:  74},
+			{move: "Qe7",  freq:  74},
+		]}]},
+		{move: "h6",   freq:  625,book:[{move: "Be3",replies:[
+			{move: "Bxc4", freq:  77,book:[{move: "dxc4",replies: deep_wayward_alt_long}]},
+			{move: "a6",   freq:  33,book:[{move: "O-O",replies:[
+				{move: "b5",  freq:  2,book:[{move: "Bb3"}]},
+			]}]},
+			{move: "Na5",  freq:  30,book:[{move: "Bd5"}]},
+			{move: "Qd7",  freq:  18},
+		]}]},
+		{move: "a6",   freq:  142,book:[{move: "Nd5"}]},
+		{move: "Nd4",   freq: 119,book:[{move: "Nxd4"}]},
+		{move: "Nb4",   freq:  71},
+	]}]},
+	{move: "a6", freq:    986,book:[{move: "a3",replies:[
+		{move: "b5", freq:   125,book:[{move: "Ba2"}]},
+		{move: "Be6", freq:   65,book:[{move: "O-O"}]},
+		{move: "Nd4", freq:   18,book:[{move: "Nxd4"}]},
+	]}]},
+	{move: "Na5", freq:   847,book:[{move: "a4"}]},
+	{move: "Nd4", freq:   650,book:[{move: "Nxd4"}]},
+	{move: "h6", freq:    406,book:[{move: "g4"}]},
+	{move: "Nb4", freq:   345,book:[{move: "Bb3"}]},
+	{move: "Re8", freq:   148},
+	{move: "Qe7", freq:    98},
+	{move: "Nh5", freq:    93},
+	{move: "Nd7", freq:    84},
+]};
+
+const inner_wayward = [
+	{move: "Bg4",  freq: 664,book:[{move: "Qg3",replies:[
+		{move: "Bxe2",  freq:  153,book:[{move: "Nxe2"}]},
+		{move: "Qd7",  freq:   130,book:[{move: "f3"}]},
+		{move: "O-O",  freq:    90},
+		{move: "h5",   freq:    73},
+		{move: "Nb4",  freq:    22},
+		{move: "Be6",   freq:   20},
+		{move: "h6",   freq:    18},
+		{move: "Na5",   freq:   10},
+	]}]},
+	{move: "O-O",  freq: 396,book:[deep_wayward_alt,deep_wayward]},
+	{move: "h6",   freq: 151},
+	{move: "Be6",  freq: 147},
+	{move: "Na5",  freq:  57},
+	{move: "Nb4",  freq:  33},
+];
+
+const deep_way_phil = {move: "Nf3",replies:[
+	{move: "O-O", freq:  25,book:[{move: "Nc3",replies:[
+		{move: "Nc6", freq:   30,book:[{move: "a4",replies:[
+			{move: "Bg4", freq:  2,book:[{move: "h3"}]},
+			{move: "h6",  freq:  1},
+		]}]},
+		{move: "c6",  freq:   18,book:[{move: "a4"}]},
+		{move: "Bg4", freq:   13,book:[{move: "h3"}]},
+		{move: "Be6", freq:    9,book:[{move: "Bxe6"}]},
+	]},{move: "O-O",replies:[
+		{move: "Bg4", freq:   7,book:[{move: "h3",replies:[
+			{move: "Bxf3", freq:   4,book:[{move: "Qxf3"}]},
+		]}]},
+		{move: "Nc6", freq:   4,book:[{move: "a4"}]},
+		{move: "c5",  freq:   2,book:[]},
+	]}]},
+	{move: "Bg4", freq:   6,book:[{move: "h3"}]},
+	{move: "Nc6", freq:   6,book:[{move: "Nc3"}]},
+	{move: "c6",  freq:   3},
+]}
+
+const alt_way_qf6 = {move:"Qf3",replies:[
+	{move: "Qxf3", freq:  197,book:[{move: "Nxf3",replies:[
+		{move: "d6",  freq:    66,book:[{move: "Ng5",replies:[
+			{move: "Nh6", freq:  285,book:[{move: "d3"}]},
+			{move: "Be6", freq:   55,book:[{move: "Bxe6",replies:[
+				{move: "fxe6",  freq:   45,book:[{move: "Nxe6",replies:[
+					{move: "Na6",  freq:  20,book:[{move: "Nxf8",replies:[
+						{move: "Kxf8", freq: 3,book:[{move: "f4"}]},
+					]}]},
+					{move: "Ke7",  freq:  11,book:[{move: "Nc7"}]},
+					{move: "Nf6",  freq:   6,book:[{move: "Nc7+"}]},
+					{move: "Kd7",  freq:   5,book:[{move: "Nxf8+"}]},
+				]}]},
+			]}]},
+			{move: "d5",  freq:   12,book:[{move: "exd5"}]},
+		]}]},
+		{move: "Bg7", freq:    38,book:[{move: "a4"}]},
+		{move: "f6",  freq:    27,book:[{move: "d4"}]},
+		{move: "Nf6", freq:    21,book:[{move: "Nxe5",replies:[
+			{move: "d5",  freq:  11,book:[{move: "exd5",replies:[
+				{move: "cxd5",  freq:  9,book:[{move: "Nxd5",replies:[
+					{move: "Nxd5",  freq:  6,book:[{move: "Bxd5",replies:[
+						{move: "Be6",  freq:   4,book:[{move: "Bxb7"}]},
+					]}]},
+				]}]},
+			]}]},
+			{move: "d6",  freq:   4},
+		]}]},
+		{move: "b5",  freq:    18,book:[{move: "Bb3"}]},
+	]}]},
+	{move: "Bg7", freq:   105,book:[{move: "a4",replies:[
+		{move: "Ne7", freq:   2,book:[{move: "d3"}]},
+		{move: "d6",  freq:   2,book:[{move: "b3"}]},
+	]}]},
+	{move: "d6",  freq:    83,book:[{move: "d3",replies:[
+		{move: "Qxf3",  freq: 398,book:[{move: "Nxf3"}]},
+		{move: "Bg7",  freq:  391,book:[{move: "Qg3"}]},
+		{move: "Be6",  freq:  261,book:[{move: "Bxe6"}]},
+		{move: "h6",   freq:  125},
+		{move: "b5",   freq:   98},
+		{move: "Be7",   freq:  77},
+	]}]},
+	{move: "b5",  freq:    78,book:[{move: "Bb3"}]},
+	{move: "Bc5",  freq:   69,book:[{move: "Qg3"}]},
+	{move: "Bb4",  freq:   46,book:[{move: "Qg3"}]},
+	{move: "Be7",  freq:   21,book:[{move: "a4"}]},
+	{move: "Qe7",  freq:   14,book:[{move: "a4"}]},
+	{move: "Bh6",  freq:   14,book:[{move: "a4"}]},
+]}
+
+const wayward_d6 = {move: "Bc4",replies:[
+	{move: "g6", freq: 57117,book:[{move: "Qd1",replies:[
+		{move: "Nf6", freq: 420,book:[{move: "d3",replies:[
+			{move: "Bg7", freq:  95,book:[deep_way_phil]},
+			{move: "Be7", freq:  21,book:[{move: "Nf3"}]},
+			{move: "Nc6", freq:  14},
+			{move: "c6",  freq:  10},
+			{move: "a6",  freq:   8},
+			{move: "Be6", freq:   7},
+			{move: "Bg4", freq:   6},
+		]}]},
+		{move: "Bg7", freq: 113,book:[{move: "d3",replies:[
+			{move: "Nf6", freq:  20,book:[deep_way_phil]},
+			{move: "Ne7", freq:   5},
+			{move: "Nd7", freq:   2},
+		]}]},
+		{move: "Nc6", freq:  37},
+		{move: "Be6", freq:  35},
+		{move: "Qf6", freq:  18},
+		{move: "c6",  freq:  17},
+		{move: "f5",  freq:  16},
+		{move: "a6",  freq:  10},
+		{move: "Qg5", freq:   7},
+		{move: "Be7", freq:   7},
+	]},{move: "Qf3",replies:[
+		{move: "Nf6", freq:  38560,book:[{move: "Nc3",replies:[
+			{move: "Bg7",  freq:  2362,book:[{move: "Ng1e2"}]},
+			{move: "c6",   freq:   967},
+			{move: "Bg4",  freq:   556},
+			{move: "Nc6",  freq:   470},
+			{move: "Be7",  freq:   357},
+			{move: "Be6",  freq:   106},
+		]}]},
+		{move: "Qf6", freq:   9260,book:[{move: "Nc3"}]},
+		{move: "Qe7", freq:   2111,book:[{move: "Ne2"}]},
+		{move: "Be6", freq:   1951,book:[{move: "Bxe6"}]},
+		{move: "f6", freq:    1280,book:[{move: "Ne2"}]},
+		{move: "f5", freq:    1251,book:[{move: "exf5"}]},
+	]}]},
+	{move: "Qe7", freq:25814,book:[{move: "Qd1",replies:[
+		{move: "Nf6", freq:  78,book:[{move: "d3",replies:[
+			{move: "Nc6", freq:  98,book:[{move: "Nc3"}]},
+			{move: "Be6", freq:  90,book:[{move: "Bxe6"}]},
+			{move: "h6",  freq:  50,book:[{move: "Nc3"}]},
+			{move: "c6",  freq:  33},
+			{move: "Bg4", freq:  28},
+			{move: "g6",  freq:  27},
+			{move: "a6",  freq:  27},
+			{move: "Qd8", freq:   9},
+		]}]},
+		{move: "Be6", freq:  27,book:[{move: "d3"}]},
+		{move: "Nc6", freq:  14},
+		{move: "c6", freq:    9},
+	]}]},
+	{move: "Qf6", freq:25308,book:[{move: "Nc3",replies:[
+		{move: "c6", freq:  4073,book:[{move: "d3",replies:[
+			{move: "g6",freq:   947,book:[{move: "Qd1"}]},
+			{move: "h6",freq:   635,book:[{move: "Be3"}]},
+			{move: "Be6",freq:  471},
+			{move: "Be7",freq:  317},
+			{move: "Qg6",freq:  201},
+			{move: "Ne7",freq:   92},
+			{move: "b5",freq:    91},
+			{move: "Nh6",freq:   89},
+			{move: "a5",freq:    84},
+			{move: "Nd7",freq:   46},
+		]}]},
+		{move: "g6", freq:  2010,book:[{move: "Qd1"}]},
+		{move: "Be6",freq:  1547,book:[{move: "d3"}]},
+		{move: "Ne7",freq:   475},
+		{move: "Qg6",freq:   226},
+		{move: "Nc6",freq:   212},
+		{move: "Nh6",freq:   138},
+		{move: "Be7",freq:    76},
+	]}]},
+	{move: "Be6", freq: 6118,book:[{move: "Bxe6"}]},
+	{move: "Nh6", freq: 6018,book:[{move: "d3"}]},
+	{move: "Qd7", freq: 4386,book:[{move: "Qe2"}]},
+	{move: "Nf6", freq: 4172,book:[{move: "Qxf7#"}]},
+	{move: "Nc6", freq:  966,book:[{move: "Qxf7#"}]},
+	{move: "Be7", freq:  638,book:[{move: "Qxf7+"}]},
+	{move: "h6", freq:   226,book:[{move: "Qxf7#"}]},
+	{move: "d5", freq:   208,book:[{move: "Qxe5+"}]},
+	{move: "c6", freq:   169,book:[{move: "Qxf7#"}]},
+]}
+
 const wayward = {move:"Qh5",replies:[
 	{move: "Nc6", freq: 344451,book:[{move: "Bc4",replies:[
 		{move: "g6", freq:  249975,book:[{move: "Qf3",replies:[
 			{move: "Nf6", freq: 188121,book:[{move: "Ne2",replies:[
 				{move: "Bg7", freq: 29774,book:[{move: "d3",replies:[
-					{move: "O-O", freq:  9608,book:[{move: "Nb1c3",replies:[
-						{move: "d6", freq:   6881,book:[deep_wayward]},
-						{move: "Nd4", freq:  1443,book:[{move: "Nxd4"}]},
-						{move: "Na5", freq:  1100,book:[{move: "a4"}]},
-						{move: "h6", freq:   1049,book:[{move: "h4"}]},
-						{move: "a6", freq:    882,book:[{move: "h4"}]},
-						{move: "Nb4", freq:   260},
-						{move: "d5",  freq:   226},
-						{move: "Ne7",  freq:  107},
-					]}]},
-					{move: "d6", freq:   2992,book:[{move: "Nb1c3",replies:[
-						{move: "Bg4",  freq: 664,book:[{move: "Qg3",replies:[
-							{move: "Bxe2",  freq:  153,book:[{move: "Nxe2"}]},
-							{move: "Qd7",  freq:   130,book:[{move: "f3"}]},
-							{move: "O-O",  freq:    90},
-							{move: "h5",   freq:    73},
-							{move: "Nb4",  freq:    22},
-							{move: "Be6",   freq:   20},
-							{move: "h6",   freq:    18},
-							{move: "Na5",   freq:   10},
+					{move: "O-O", freq:  9721,book:[{move: "Nb1c3",replies:[
+						{move: "d6", freq:   6951,book:[deep_wayward_alt,deep_wayward]},
+						{move: "Nd4", freq:  1458,book:[{move: "Nxd4",replies:[
+							{move: "exd4",  freq:  1437,book:[{move: "Nd5",replies:[
+								{move: "Nxd5",  freq: 603,book:[{move: "Bxd5",replies:[
+									{move: "c6",  freq:   607,book:[{move: "Bb3",replies:[
+										{move: "d5",  freq: 337,book:[{move: "exd5",replies:[
+											{move: "Re8+",  freq:  111,book:[{move: "Kd1"}]},
+											{move: "cxd5",  freq:   25},
+										]}]},
+										{move: "d6",  freq:  75},
+										{move: "a5",  freq:  69},
+										{move: "b5",  freq:  23},
+										{move: "Re8", freq:  16},
+										{move: "Qe7", freq:  10},
+										{move: "Kh8", freq:   9},
+									]}]},
+									{move: "d6",  freq:    29},
+									{move: "c5",  freq:     7},
+								]}]},
+								{move: "c6",    freq: 109,book:[{move: "Nxf6+"}]},
+								{move: "d6",    freq:  18,book:[{move: "Bg5"}]},
+								{move: "Re8",   freq:   7},
+							]}]},
 						]}]},
-						{move: "O-O",  freq: 396,book:[deep_wayward]},
-						{move: "h6",   freq: 151},
-						{move: "Be6",  freq: 147},
-						{move: "Na5",  freq:  57},
-						{move: "Nb4",  freq:  33},
+						{move: "Na5", freq:  1117,book:[{move: "a4",replies:[
+							{move: "Nxc4",   freq:   3,book:[{move: "dxc4",replies:[
+								{move: "c6",  freq:   2,book:[{move: "h3"}]},
+								{move: "Ne8",  freq:  1,book:[{move: "h4"}]},
+							]}]},
+						]}]},
+						{move: "h6", freq:   1065,book:[{move: "h4"}]},
+						{move: "a6", freq:    889,book:[{move: "h4"}]},
+						{move: "Nb4", freq:   263},
+						{move: "d5",  freq:   227},
+						{move: "Ne7",  freq:  107},
+						{move: "Re8",  freq:   77},
+						{move: "b6",   freq:   37},
 					]}]},
-					{move: "h6", freq:   1150,book:[{move: "Nb1c3"}]},
-					{move: "Na5", freq:   367},
-					{move: "Nd4", freq:   249},
+					{move: "d6", freq:   3031,book:[{move: "Nb1c3",replies:inner_wayward}]},
+					{move: "h6", freq:   1166,book:[{move: "Nb1c3",replies:[
+						{move: "O-O",  freq:  537,book:[{move: "h4"}]},
+						{move: "d6",  freq:   392,book:[{move: "h3"}]},
+						{move: "Na5",  freq:   46},
+						{move: "a6",  freq:    24},
+						{move: "Nd4",  freq:   20},
+					]}]},
+					{move: "Na5", freq:   371,book:[{move: "Nb1c3"}]},
+					{move: "Nd4", freq:   255},
+					{move: "a6",  freq:   162},
+					{move: "d5",  freq:   129},
+					{move: "Nb4", freq:   129},
+					{move: "Qe7", freq:    21},
 				]}]},
 				{move: "d6", freq:   5923,book:[{move: "Nb1c3",replies:[
 					{move: "Bg4", freq: 621,book:[{move: "Qe3",replies:[
-						{move: "Nxe2", freq: 57,book:[{move: "Nxe2"}]},
+						{move: "Bxe2", freq: 57,book:[{move: "Nxe2"}]},
 						{move: "h5",   freq: 38,book:[{move: "O-O"}]},
 						{move: "Bg7",  freq: 26,book:[{move: "d3"}]},
 						{move: "Nb4",  freq: 12},
 					]}]},
-					{move: "Bg7", freq: 342,book:[{move: "d3"}]},
+					{move: "Bg7", freq: 342,book:[{move: "d3",replies:inner_wayward}]},
 					{move: "Be6", freq:  83},
 					{move: "Nd4", freq:  30},
 				]}]},
 				{move: "Bc5", freq:  3264,book:[{move: "d3",replies:[
 					{move: "d6", freq:   570,book:[{move: "Bg5"}]},
-					{move: "O-O", freq:  469,book:[{move: "Bg5"}]},
+					{move: "O-O", freq:  469,book:[{move: "Bg5",replies:[
+						{move: "Be7", freq:  178,book:[{move: "Bh6",replies:[
+							{move: "Re8", freq:  171,book:[{move: "Nb1c3"}]},
+						]}]},
+						{move: "Kg7", freq:   39,book:[{move: "Nb1c3"}]},
+						{move: "Nd4", freq:   12,book:[{move: "Nxd4"}]},
+					]}]},
 					{move: "h6",  freq:  269,book:[{move: "Nb1c3"}]},
 					{move: "Nd4",  freq: 122,book:[{move: "Nxd4"}]},
 					{move: "d5", freq:    57},
@@ -2906,28 +3902,46 @@ const wayward = {move:"Qh5",replies:[
 				{move: "d5", freq:    882,book:[{move: "exd5"}]},
 				{move: "Nd4", freq:   793,book:[{move: "Nxd4"}]},
 				{move: "Na5", freq:   543,book:[{move: "d3"}]},
+				{move: "Nb4", freq:   489,book:[{move: "Qb3"}]},
+				{move: "Bh6", freq:   400,book:[{move: "Nb1c3"}]},
+				{move: "a6", freq:    390,book:[{move: "Nb1c3"}]},
+				{move: "h6", freq:    113,book:[]},
 			]}]},
 			{move: "Qf6", freq:  35167,book:[{move: "Qd1",replies:[
-				{move: "Bc5", freq:   569,book:[{move: "Nf3",replies:[
-					{move: "d6",  freq:  251,book:[{move: "d3"}]},
-					{move: "Nd4", freq:  170,book:[{move: "Nxd4"}]},
-					{move: "Ng8e7", freq: 47},
+				{move: "Bc5", freq:   576,book:[{move: "Nf3",replies:[
+					{move: "d6",  freq:  254,book:[{move: "d3",replies:[
+						{move: "Bg4",    freq: 23,book:[{move: "c3",replies:[
+							{move: "Bxf3",    freq:  1,book:[{move: "Qxf3",replies:[
+								{move: "Qxf3",     freq:  1,book:[{move: "gxf3",replies:[
+									{move: "Nf6",  freq:  1,book:[{move: "a4"}]},
+								]}]},
+							]}]},
+						]}]},
+						{move: "h6",     freq:  5},
+						{move: "Nd4",    freq:  3},
+						{move: "Ng8e7",  freq:  1},
+					]}]},
+					{move: "Nd4", freq:  172,book:[{move: "Nxd4"}]},
+					{move: "Ng8e7", freq: 48},
 					{move: "Nh6",   freq: 12},
 					{move: "g5",    freq: 11},
+					{move: "d5",    freq:  7},
+					{move: "h6",    freq:  6},
 				]}]},
-				{move: "Bg7", freq:   157,book:[{move: "Nc3"}]},
-				{move: "d6",  freq:    90},
+				{move: "Bg7", freq:   159,book:[{move: "Nc3"}]},
+				{move: "d6",  freq:    90,book:[{move: "d3"}]},
 				{move: "Nd4", freq:    37},
 				{move: "Ng8e7",freq:   24},
 				{move: "Nh6", freq:    23},
 				{move: "Na5", freq:    12},
+				{move: "a6",  freq:     9},
 			]}]},
-			{move: "Qe7", freq:   5881},
-			{move: "f6",  freq:   3077},
+			{move: "Qe7", freq:   5881,book:[{move: "Ne2"}]},
+			{move: "f6",  freq:   3077,book:[{move: "Ne2"}]},
 			{move: "Nd4",  freq:  2118,book:[{move: "Qxf7#"}]},
-			{move: "Nh6",  freq:  1821},
+			{move: "Nh6",  freq:  1821,book:[{move: "Ne2"}]},
 			{move: "Bg7",  freq:  1497,book:[{move: "Qxf7#"}]},
-			{move: "f5",  freq:   1304},
+			{move: "f5",  freq:   1304,book:[{move: "Ne2"}]},
 			{move: "d6",  freq:    389,book:[{move: "Qxf7#"}]},
 			{move: "Bc5",  freq:   369,book:[{move: "Qxf7#"}]},
 			{move: "d5",  freq:    348,book:[{move: "Bxd5"}]},
@@ -2946,7 +3960,15 @@ const wayward = {move:"Qh5",replies:[
 					{move: "Ng6",   freq:    47},
 					{move: "Nb4",   freq:    30},
 				]}]},
-				{move: "g6",    freq:   4544,book:[{move: "Qg5"}]},
+				{move: "g6",    freq:   4544,book:[{move: "Qg5",replies:[
+					{move: "Qxg5",   freq:  1084,book:[{move: "Nxg5"}]},
+					{move: "h6",   freq:    1041,book:[{move: "Qg3"}]},
+					{move: "d6",   freq:     730,book:[{move: "Nd5"}]},
+					{move: "Nd4",   freq:    559,book:[{move: "Qxf6"}]},
+					{move: "Be7",   freq:    126},
+					{move: "Qg7",   freq:    106},
+					{move: "Nb4",   freq:     97},
+				]}]},
 				{move: "d6",    freq:   2416,book:[{move: "Nd5"}]},
 				{move: "Nd4",   freq:   2224,book:[{move: "Nd5"}]},
 				{move: "Qg6",   freq:    370},
@@ -2963,7 +3985,13 @@ const wayward = {move:"Qh5",replies:[
 				]}]},
 				{move: "Ng8e7",   freq: 511,book:[{move: "Nb5",replies:[
 					{move: "Kd8",     freq: 123,book:[{move: "d3",replies:[
-						{move: "a6",   freq:  48,book:[{move: "Nc3"}]},
+						{move: "a6",   freq:  48,book:[{move: "Nc3",replies:[
+							{move: "b5",     freq:  14,book:[{move: "Bb3"}]},
+							{move: "d6",     freq:  11,book:[{move: "Be3"}]},
+							{move: "Na5",    freq:   9,book:[{move: "Be3"}]},
+							{move: "Nd4",    freq:   7,book:[{move: "a4"}]},
+							{move: "Bg7",    freq:   6,book:[{move: "Ng1e2"}]},
+						]}]},
 					]}]},
 					{move: "Rb8",     freq:   3},
 				]}]},
@@ -3047,61 +4075,7 @@ const wayward = {move:"Qh5",replies:[
 		{move: "Nd4", freq:    228,book:[{move: "Qxf7#"}]},
 		{move: "g5", freq:     191,book:[{move: "Qxf7#"}]},
 	]}]},
-	{move: "d6", freq:   87845,book:[{move: "Bc4",replies:[
-		{move: "g6", freq: 57117,book:[{move: "Qd1",replies:[
-			{move: "Nf6", freq: 415,book:[{move: "d3",replies:[
-				{move: "Bg7", freq:  95,book:[{move: "Nf3",replies:[
-					{move: "O-O", freq:  25,book:[{move: "O-O",replies:[
-						{move: "Bg4", freq:   7,book:[{move: "h3"}]},
-						{move: "Nc6", freq:   4,book:[{move: "a4"}]},
-					]}]},
-					{move: "Bg4", freq:   6},
-					{move: "Nc6", freq:   6},
-					{move: "c6",  freq:   3},
-				]}]},
-				{move: "Be7", freq:  21},
-				{move: "Nc6", freq:  14},
-				{move: "c6",  freq:  10},
-			]}]},
-			{move: "Bg7", freq: 112,book:[{move: "d3"}]},
-			{move: "Nc6", freq:  36},
-			{move: "Be6", freq:  35},
-		]}]},
-		{move: "Qe7", freq:25814,book:[{move: "Qd1",replies:[
-			{move: "Nf6", freq:  78,book:[{move: "d3",replies:[
-				{move: "Nc6", freq:  98,book:[{move: "Nc3"}]},
-				{move: "Be6", freq:  90,book:[{move: "Bxe6"}]},
-				{move: "h6",  freq:  50,book:[{move: "Nc3"}]},
-				{move: "c6",  freq:  33},
-				{move: "Bg4", freq:  28},
-				{move: "g6",  freq:  27},
-				{move: "a6",  freq:  27},
-				{move: "Qd8", freq:   9},
-			]}]},
-			{move: "Be6", freq:  27,book:[{move: "d3"}]},
-			{move: "Nc6", freq:  14},
-			{move: "c6", freq:    9},
-		]}]},
-		{move: "Qf6", freq:25308,book:[{move: "Nc3",replies:[
-			{move: "c6", freq:  4073,book:[{move: "d3"}]},
-			{move: "g6", freq:  2010,book:[{move: "Qd1"}]},
-			{move: "Be6",freq:  1547,book:[{move: "d3"}]},
-			{move: "Ne7",freq:   475},
-			{move: "Qg6",freq:   226},
-			{move: "Nc6",freq:   212},
-			{move: "Nh6",freq:   138},
-			{move: "Be7",freq:    76},
-		]}]},
-		{move: "Be6", freq: 6118,book:[{move: "Bxe6"}]},
-		{move: "Nh6", freq: 6018},
-		{move: "Qd7", freq: 4386},
-		{move: "Nf6", freq: 4172,book:[{move: "Qxf7#"}]},
-		{move: "Nc6", freq:  966,book:[{move: "Qxf7#"}]},
-		{move: "Be7", freq:  638,book:[{move: "Qxf7+"}]},
-		{move: "h6", freq:   226,book:[{move: "Qxf7#"}]},
-		{move: "d5", freq:   208,book:[{move: "Qxe5+"}]},
-		{move: "c6", freq:   169,book:[{move: "Qxf7#"}]},
-	]}]},
+	{move: "d6", freq:   87845,book:[wayward_d6]},
 	{move: "Qf6", freq:  70822,book:[{move: "Nc3",replies:[
 		{move: "c6", freq:  3633,book:[{move: "Bc4",replies:[
 			{move: "g6", freq:  761,book:[{move: "Qd1",replies:[
@@ -3116,10 +4090,14 @@ const wayward = {move:"Qh5",replies:[
 				{move: "Ne7", freq:  5},
 				{move: "a5",  freq:  5},
 				{move: "d6",  freq:  4},
+			]},alt_way_qf6]},
+			{move: "Bc5", freq: 665,book:[{move: "f4",replies:[
+				{move: "Qxf4",  freq:  10,book:[{move: "d4"}]},
+				{move: "g6",    freq:   7,book:[{move: "Qxe5+"}]},
+				{move: "d6",    freq:   3,book:[{move: "d3"}]},
 			]}]},
-			{move: "Bc5", freq: 665},
-			{move: "d6",  freq: 330},
-			{move: "Bb4", freq: 100},
+			{move: "d6",  freq: 330,book:[{move: "d3"}]},
+			{move: "Bb4", freq: 100,book:[{move: "d3"}]},
 			{move: "b5", freq:   86},
 			{move: "Ne7", freq:  82},
 			{move: "Be7", freq:  43},
@@ -3137,10 +4115,10 @@ const wayward = {move:"Qh5",replies:[
 				{move: "g6",   freq:  1},
 				{move: "Bxd4", freq:  1},
 			]}]},
-			{move: "Nc6", freq:  422},
-			{move: "g6",  freq:  417},
-			{move: "c6",  freq:  400},
-			{move: "Ne7",  freq: 194},
+			{move: "Nc6", freq:  422,book:[{move: "Nd5"}]},
+			{move: "g6",  freq:  417,book:[{move: "Qxe5+"}]},
+			{move: "c6",  freq:  400,book:[{move: "Qxe5+"}]},
+			{move: "Ne7",  freq: 194,book:[{move: "Qxe5"}]},
 			{move: "Nh6",  freq:  36},
 		]}]},
 		{move: "g6", freq:  2125,book:[{move: "Qd1",replies:[
@@ -3159,20 +4137,46 @@ const wayward = {move:"Qh5",replies:[
 	{move: "Nf6", freq:  68939,book:[{move: "Qxe5+",replies:[
 		{move: "Be7", freq:  48563,book:[{move: "Qf4",replies:[
 			{move: "O-O", freq: 922,book:[{move: "Nc3",replies:[
-				{move: "Nc6", freq:  67,book:[{move: "e5",replies:[
-					{move: "Nh5", freq:  23,book:[{move: "Qf3"}]},
-					{move: "Ne8", freq:   8},
+				{move: "Nc6", freq:  68,book:[{move: "e5",replies:[
+					{move: "Nh5", freq:  23,book:[{move: "Qf3",replies:[
+						{move: "g6", freq:  17,book:[{move: "Qd1"}]},
+						{move: "Nd4", freq:  7,book:[{move: "Qe4"},{move: "Qxh5",replies:[
+							{move: "Nxc2+", freq:   3,book:[{move: "Kd1",replies:[
+								{move: "Nxa1", freq: 3,book:[{move: "Nf3",replies:[
+									{move: "g6", freq: 1,book:[{move: "Qh6"}]},
+									{move: "d6", freq: 1,book:[{move: "Bc4"}]},
+									{move: "d5", freq: 1,book:[{move: "d4"}]},
+									{move: "c5", freq: 1,book:[{move: "Bc4"}]},
+								]}]},
+							]}]},
+						]}]},
+						{move: "Nxe5", freq: 2},
+					]}]},
+					{move: "Ne8", freq:   8,book:[{move: "d4"}]},
 					{move: "Re8", freq:   5},
 					{move: "Nxe5", freq:  2},
 				]}]},
-				{move: "Re8", freq:  45,book:[{move: "e5"}]},
+				{move: "Re8", freq:  45,book:[{move: "e5",replies:[
+					{move: "Bc5",  freq:  2,book:[{move: "Be2"}]},
+					{move: "Nh5",  freq:  2,book:[{move: "Qf3"}]},
+					{move: "Nd5",  freq:  1},
+					{move: "Bb4",  freq:  1},
+					{move: "Nd6",  freq:  1},
+					{move: "Nc6",  freq:  1},
+				]}]},
 				{move: "d5",  freq:  40,book:[{move: "e5",replies:[
 					{move: "Ne4",  freq:  9,book:[{move: "Nxe4",replies:[
 						{move: "dxe4", freq:   9,book:[{move: "Qxe4"}]},
 					]}]},
+					{move: "Nh5",  freq:  3,book:[{move: "Qf3"}]},
+					{move: "d4",  freq:   3,book:[{move: "exf6"}]},
+					{move: "Nf6d7",freq:  3,book:[{move: "Nf3"}]},
+					{move: "Ng4",  freq:  2},
 				]}]},
-				{move: "d6",  freq:  18},
-				{move: "Bd6", freq:  15},
+				{move: "d6",  freq:  18,book:[{move: "d4"}]},
+				{move: "Bd6", freq:  15,book:[{move: "Qf3"}]},
+				{move: "c6",  freq:   6},
+				{move: "Bb4",  freq:  4},
 			]}]},
 			{move: "Nc6", freq: 492,book:[{move: "e5",replies:[
 				{move: "Nd5", freq: 129,book:[{move: "Qe4",replies:[
@@ -3191,15 +4195,38 @@ const wayward = {move:"Qh5",replies:[
 				{move: "Nh5", freq:   9,book:[{move: "Qa5"}]},
 				{move: "Ng8", freq:   7},
 			]}]},
-			{move: "d6",  freq: 204,book:[{move: "d4"}]},
+			{move: "d6",  freq: 204,book:[{move: "d4",replies:[
+				{move: "O-O", freq:   64,book:[{move: "Bd3"}]},
+				{move: "Nc6", freq:   62,book:[{move: "c3"}]},
+				{move: "Nh5", freq:   12},
+				{move: "hj6", freq:    9},
+			]}]},
 			{move: "Bd6", freq:  77},
 			{move: "d5", freq:   60},
 			{move: "Nh5", freq:  17},
 		]}]},
 		{move: "Qe7", freq:  15555,book:[{move: "Qxe7+",replies:[
 			{move: "Bxe7", freq:  8307,book:[{move: "Nc3",replies:[
-				{move: "O-O", freq: 786,book:[{move: "d4"}]},
-				{move: "Nc6", freq: 709,book:[{move: "Bc4"}]},
+				{move: "O-O", freq: 786,book:[{move: "e5",replies:[
+					{move: "Ng4", freq:   46,book:[{move: "Nd5",replies:[
+						{move: "Bc5", freq:  3,book:[{move: "Nxc7",replies:[
+							{move: "Nxf1", freq:  1,book:[{move: "b4"}]},
+							{move: "Bxf1+", freq: 1,book:[{move: "Ke2"}]},
+						]}]},
+						{move: "Bd8", freq:  2},
+						{move: "Nc6", freq:  2},
+						{move: "Na6", freq:  2},
+					]}]},
+					{move: "Ne8", freq:   19,book:[{move: "d4"}]},
+					{move: "Nh5", freq:   11,book:[{move: "d4"}]},
+					{move: "Nd5", freq:    5,book:[{move: "Nxd5"}]},
+				]}]},
+				{move: "Nc6", freq: 709,book:[{move: "Bc4",replies:[
+					{move: "O-O", freq:   66,book:[{move: "Nf3"}]},
+					{move: "d6",  freq:   49,book:[{move: "d3"}]},
+					{move: "Nd4", freq:   34,book:[{move: "Bb3"}]},
+					{move: "Bb4",  freq:  24,book:[{move: "Ng1e2"}]},
+				]}]},
 				{move: "Bb4", freq: 549,book:[{move: "e5"}]},
 				{move: "d6", freq:  234,book:[{move: "Ng1e2"}]},
 				{move: "Bc5", freq:  62},
@@ -3219,7 +4246,7 @@ const wayward = {move:"Qh5",replies:[
 			{move: "Qd8", freq:    7},
 		]}]},
 		{move: "c6",  freq:   517,book:[{move: "Qe2"}]},
-		{move: "g6",  freq:   195},
+		{move: "g6",  freq:   195,book:[{move: "Qd1"}]},
 		{move: "Nc6", freq:    69},
 		{move: "d6",  freq:    66},
 	]}]},
@@ -3234,6 +4261,98 @@ const wayward = {move:"Qh5",replies:[
 	{move: "c6", freq:     720},
 	{move: "Nh6", freq:    668},
 	{move: "Be7", freq:    404},
+]}
+
+const owen = {move: "d4",replies:[
+	{move: "Bb7", freq:   677363,book:[{move: "Nc3",replies:[
+		{move: "e6", freq: 180521,book:[owen_e6]},
+		{move: "g6", freq:  65709,book:[{move: "h4",replies:[
+			{move: "Bg7", freq: 337,book:[{move: "h5",stock:2.47,replies:double_fia}]},
+			{move: "h5", freq:   20},
+		]}]},
+		{move: "Nf6", freq: 36211},
+		{move: "d6", freq:  22458},
+		{move: "d5", freq:   7090},
+	]}]},
+	{move: "e6", freq:     31217,book:[{move: "Nf3"}]},
+	{move: "Ba6", freq:    19616,book:[{move: "Bxa6"}]},
+	{move: "g6", freq:     13960},
+]}
+
+const modern = {move: "d4",replies:[//modern
+	{move: "Bg7", freq: 1126123,book:[{move: "Nc3",replies:[
+		{move: "d6", freq: 71077,book:[{move: "f4",replies:[
+			{move: "Nf6", freq: 7229,book:[{move: "Nf3",replies:pirc_d6_modern}]},
+			{move: "Nd7", freq: 2350},
+			{move: "Nc6", freq: 2191},
+			{move: "e6", freq:  1420},
+		]}]},
+		{move: "e6", freq: 47075,book:[{move: "h4",replies:[
+			{move: "Ne7",freq:  590,book:[{move: "h5",replies:[
+				{move: "O-O",freq:  249,book:[{move: "Qg4",replies:[
+					{move: "f5", freq:  34,book:[{move: "Qh4",replies:[
+						{move: "Ne7c6", freq: 2,book:[{move: "Bg5"}]},
+						{move: "Bf6", freq:   2,book:[{move: "Qh2"}]},
+						{move: "h6",  freq:   1,book:[{move: "Bxh6"}]},
+						{move: "fxe4", freq:  1,book:[{move: "hxg6"}]},
+						{move: "Nd5", freq:   1,book:[{move: "Qxd8"}]},
+						{move: "Qe8", freq:   1,book:[{move: "hxg6"}]},
+						{move: "g5",  freq:   1,book:[{move: "Bxg5"}]},
+					]}]},
+					{move: "d5", freq:  22,book:[{move: "hxg6",replies:[
+						{move: "fxg6",freq:  4,book:[{move: "Qh4",replies:[
+							{move: "h5",freq:  7,book:[{move: "Bg5",replies:[
+								{move: "Nb8c6", freq: 3,book:[{move: "O-O-O"}]},
+								{move: "dxe4",  freq: 2,book:[{move: "Bxe7"}]},
+							]}]},
+						]}]},
+					]}]},
+				]}]},
+				{move: "b6",freq:    68,book:[{move: "h6"}]},
+				{move: "gxh5",freq:  62,book:[{move: "Qxh5"}]},
+				{move: "d5",freq:    54,book:[{move: "h6",replies:[
+					{move: "Bf8", freq:  462,book:[{move: "Bg5"}]},
+					{move: "f65",freq:    40},
+				]}]},
+			]}]},
+			{move: "h5",freq:    70},
+			{move: "d6",freq:    52},
+			{move: "d5",freq:    50},
+		]}]},
+		{move: "b6", freq: 16226,book:[{move: "h4",replies:[
+			{move: "Bb7", freq: 1212,book:[{move: "h5",stock:2.47,replies:double_fia}]},
+			{move: "h5", freq:   159},
+			{move: "h6", freq:    88},
+		]}]},
+		{move: "Nf6", freq:16066,book:[{move: "e5",replies:[
+			{move: "Ng8", freq: 47723,book:[{move: "Bf4"}]},
+			{move: "Nh5", freq:  9854,book:[{move: "g4"}]},
+			{move: "O-O", freq:  9242,book:[{move: "exf6"}]},
+			{move: "Nd5", freq:  3333,book:[{move: "Nxd5"}]},
+			{move: "d6", freq:   2654,book:[{move: "exf6"}]},
+		]}]},
+		{move: "c5", freq: 12791},
+		{move: "c6", freq: 10662,book:[{move: "f4"}]},
+	]}]},
+	{move: "d6", freq:    55035,book:[{move: "Nc3"}]},
+	{move: "e6", freq:    17431,book:[{move: "h4"}]},
+	{move: "b6", freq:    13448,book:[{move: "Nc3",replies:[
+		{move: "Bg7", freq:  8063,book:[{move: "h4",replies:[
+			{move: "Bb7",  freq: 1315,book:[{move: "h5",stock:2.47,replies:double_fia}]},
+			{move: "h5",   freq:  174},
+			{move: "h6",   freq:   97},
+		]}]},
+		{move: "Bb7", freq:  6781,book:[{move: "h4",replies:[
+			{move: "Bg7",  freq: 1667,book:[{move: "h5",stock:2.47,replies:double_fia}]},
+			{move: "h5",   freq:  273},
+			{move: "h6",   freq:  172},
+		]}]},
+		{move: "e6",  freq:   991},
+		{move: "d6",  freq:   374},
+		{move: "Ba6", freq:   244},
+	]}]},
+	{move: "Nf6", freq:   12484},
+	{move: "d5", freq:    11125},
 ]}
 
 const whiteBook = {
@@ -3289,46 +4408,7 @@ const whiteBook = {
 				]}]},
 				{move: "d5",freq: 7622050,master:22589,book:scandinavian},
 				{move: "c6",freq: 4613271,master:84737,book:caro_kahn},
-				{move: "g6",freq: 2753427,master:32190,book:[{move: "d4",replies:[//modern
-					{move: "Bg7", freq: 1126123,book:[{move: "Nc3",replies:[
-						{move: "d6", freq: 71077,book:[{move: "f4",replies:[
-							{move: "Nf6", freq: 7229,book:[{move: "Nf3",replies:pirc_d6_modern}]},
-							{move: "Nd7", freq: 2350},
-							{move: "Nc6", freq: 2191},
-							{move: "e6", freq:  1420},
-						]}]},
-						{move: "e6", freq: 47075,book:[{move: "h4",replies:[
-							{move: "Ne7",freq:  590,book:[{move: "h5",replies:[
-								{move: "O-O",freq:  249,book:[{move: "Qg4"}]},
-								{move: "b6",freq:    68,book:[{move: "h6"}]},
-								{move: "gxh5",freq:  62,book:[{move: "Qxh5"}]},
-								{move: "d5",freq:    54},
-							]}]},
-							{move: "h5",freq:    70},
-							{move: "d6",freq:    52},
-							{move: "d5",freq:    50},
-						]}]},
-						{move: "b6", freq: 16226,book:[{move: "h4",replies:[
-							{move: "Bb7", freq: 1212,book:[{move: "h5",stock:2.47,replies:double_fia}]},
-							{move: "h5", freq:   159},
-							{move: "h6", freq:    88},
-						]}]},
-						{move: "Nf6", freq:16066,book:[{move: "e5",replies:[
-							{move: "Ng8", freq: 47723,book:[{move: "Bf4"}]},
-							{move: "Nh5", freq:  9854,book:[{move: "g4"}]},
-							{move: "O-O", freq:  9242,book:[{move: "exf6"}]},
-							{move: "Nd5", freq:  3333,book:[{move: "Nxd5"}]},
-							{move: "d6", freq:   2654,book:[{move: "exf6"}]},
-						]}]},
-						{move: "c5", freq: 12791},
-						{move: "c6", freq: 10662},
-					]}]},
-					{move: "d6", freq:    55035,book:[{move: "Nc3"}]},
-					{move: "e6", freq:    17431,book:[{move: "h4"}]},
-					{move: "b6", freq:    13448},
-					{move: "Nf6", freq:   12484},
-					{move: "d5", freq:    11125},
-				]}]},
+				{move: "g6",freq: 2753427,master:32190,book:[modern]},
 				{move: "d6",freq: 2578568,master:40681,book:[{move: "d4",replies:[
 					{move: "Nf6", freq:  515890,book:[{move: "Nc3",replies:[
 						{move: "g6", freq:   246879,book:[{move: "f4",replies:[
@@ -3349,27 +4429,36 @@ const whiteBook = {
 					{move: "Nd7", freq:   74121},
 					{move: "Nc6", freq:   30383},
 				]}]},//pirc
-				{move: "b6",freq: 1805399,book:[{move: "d4",replies:[
-					{move: "Bb7", freq:   677363,book:[{move: "Nc3",replies:[
-						{move: "e6", freq: 180521,book:[owen_e6]},
-						{move: "g6", freq:  65709,book:[{move: "h4",replies:[
-							{move: "Bg7", freq: 337,book:[{move: "h5",stock:2.47,replies:double_fia}]},
-							{move: "h5", freq:   20},
-						]}]},
-						{move: "Nf6", freq: 36211},
-						{move: "d6", freq:  22458},
-						{move: "d5", freq:   7090},
-					]}]},
-					{move: "e6", freq:     31217,book:[{move: "Nf3"}]},
-					{move: "Ba6", freq:    19616,book:[{move: "Bxa6"}]},
-					{move: "g6", freq:     13960},
-				]}]},//owen
+				{move: "b6",freq: 1805399,book:[owen]},//owen
 				{move: "Nf6",freq: 1445137,book:[alekhine]},//alekhine
-				{move: "Nc6",freq: 1204761,master:19927,book:[{move: "d4",replies:[
-					{move: "d5", freq:  129518,book:[{move: "e5"}]},
-					{move: "e5", freq:  103402},
-					{move: "e6", freq:   58454},
-					{move: "d6", freq:   20943},
+				{move: "Nc6",freq: 1204761,master:19927,book:[{move: "d4",replies:[//nimzo
+					{move: "d5", freq:  129518,book:[{move: "e5",replies:[
+						{move: "Bf5", freq: 242662,book:[{move: "c3"}]},
+						{move: "f6", freq:   68297,book:[{move: "f4"}]},
+						{move: "e6", freq:   55590,book:[{move: "Nf3"}]},
+					]}]},
+					{move: "e5", freq:  103402,book:[{move: "d5",replies:[
+						{move: "Nc6e7", freq: 558101,book:[{move: "Nf3"}]},
+						{move: "Nb8", freq:    64185,book:[{move: "Nf3"}]},
+						{move: "Nd4", freq:    58043,book:[{move: "c3",replies:[
+							{move: "Bc5", freq:  6645,book:[{move: "cxd4"}]},
+							{move: "Nb5", freq:  6079,book:[{move: "Bxb5"}]},
+							{move: "c5",  freq:  4736,book:[{move: "cxd4"}]},
+							{move: "Qh4",  freq: 3900,book:[{move: "Bd3",replies:[
+								{move: "Bc5",  freq: 83,book:[{move: "cxd4"}]},
+								{move: "Nb5",  freq: 80,book:[{move: "g3"}]},
+								{move: "Nf6",  freq: 49,book:[{move: "cxd4"}]},
+							]}]},
+							{move: "Nf6",  freq: 2717},
+							{move: "Ne6",  freq: 1551},
+							{move: "c6",   freq: 1473},
+							{move: "Nf5",  freq: 1302},
+						]}]},
+						{move: "Nb4", freq:    10994,book:[{move: "Be3"}]},
+						{move: "Na5", freq:     4201,book:[{move: "Nc3"}]},
+					]}]},
+					{move: "e6", freq:   58454,book:[{move: "Nf3"}]},
+					{move: "d6", freq:   20943,book:[{move: "d5"}]},
 					{move: "Nf6", freq:  16629,book:[{move: "d5"}]},
 				]}]},
 				{move: "a6",freq:   214136,book:[{move: "d4"}]},
@@ -3389,6 +4478,8 @@ const whiteBook = {
 			{move: "f5",   freq:   591035},
 			{move: "Nc6",   freq:  248999,book:[{move: "Bf4"},{move: "d5"}]},
 			{move: "a6",   freq:    64800},
-		]}
+		]},
+		polish,
+		kadas
 	]
 }

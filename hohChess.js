@@ -436,6 +436,16 @@ function hohChess(DOMlocation,options){
 			boardState.pieces[move.y0*8 + move.x0] = "";
 			if(boardState.isWhite){
 				boardState.pieces[move.y*8 + move.x] = move.name;
+				if(move.special === "castle" && move.x0 === 4){
+					if(move.x === 6){
+						boardState.pieces[move.y*8 + move.x - 1] = "R";
+						boardState.pieces[move.y*8 + move.x + 1] = ""
+					}
+					else if(move.x === 2){
+						boardState.pieces[move.y*8 + move.x + 1] = "R";
+						boardState.pieces[move.y*8 + move.x - 2] = ""
+					}
+				}
 			}
 			else{
 				boardState.pieces[move.y*8 + move.x] = move.name.toLowerCase();
