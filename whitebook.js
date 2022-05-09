@@ -3362,7 +3362,14 @@ const d_sic = {move: "d4",replies:[
 		{move: "g6",  freq:  53731,book:[{move: "Nc3",replies:[
 			{move: "Bg7",  freq: 25828,book:[{move: "Nf3",replies:[
 				{move: "Nf6",  freq:   33172,book:[some_dragon]},//Bb5+
-				{move: "Nc6",  freq:   12691},
+				{move: "Nc6",  freq:   12691,book:[{move: "h3",replies:[
+					{move: "Nf6",  freq:    9771,book:[{move: "d5"}]},
+					{move: "Bd7",  freq:    1066},
+					{move: "e6",   freq:    1057},
+					{move: "a6",   freq:     962},
+					{move: "Qb6",  freq:     822},
+					{move: "e5",   freq:     250},
+				]}]},
 				{move: "a6",   freq:    5363},
 				{move: "Bg4",  freq:    4757},
 				{move: "e6",   freq:    4378},
