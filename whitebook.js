@@ -5122,10 +5122,10 @@ const declined = {move: "a4",replies:[//declined
 
 const evans = {move: "b4",replies:[//evans gambit
 	{move: "Bxb4", freq: 455004,master:1161,book:[{move: "c3",replies:[
-		{move: "Bc5",freq:  143547,master:36,book:hoh_c_variation},
-		{move: "Ba5",freq:  194261,master:650,book:hoh_a_variation},
-		{move: "Be7",freq:   90146,master:372,book:hoh_e_variation},
-		{move: "Bd6",freq:   23741,master:101,book:[{move: "d4",replies:[
+		{move: "Bc5",freq:  158957,master:36,book:hoh_c_variation},
+		{move: "Ba5",freq:  215705,master:650,book:hoh_a_variation},
+		{move: "Be7",freq:  100183,master:372,book:hoh_e_variation},
+		{move: "Bd6",freq:   26215,master:101,book:[{move: "d4",replies:[
 			{move: "Nf6", freq: 9266,book:[{move: "O-O",replies:[
 				{move: "O-O",   freq:   4679,book:[{move: "Re1"}]},
 				{move: "h6",   freq:    1242,book:[{move: "Bd5"}]},
@@ -5137,7 +5137,19 @@ const evans = {move: "b4",replies:[//evans gambit
 			{move: "h6",  freq: 1774,book:[{move: "O-O"}]},
 			{move: "Qe7", freq: 1141,book:[{move: "O-O"}]},
 		]}]},
-		{move: "Bf8",freq:    1498,master:2,book:[{move: "d4"}]}
+		{move: "Bf8",freq:    1696,master:2,book:[{move: "d4"}]},
+		{move: "f5",  freq:    257,book:[{move: "cxb4",replies:[//fishslayer
+			{move: "fxe5",  freq:  224,book:[{move: "b5",replies:[
+				{move: "Qf6", freq:  16,book:[{move: "bxc6",replies:[
+					{move: "bxc6",freq:    12,book:[{move: "Ng1",replies:[
+						{move: "d5",freq:   6,book:[{move: "Nc3",replies:[
+							{move: "dxc4",freq: 1,book:[{move: "Ba3"}]},
+						]}]},
+					]}]},
+				]}]},
+				{move: "d5",  freq:   5,book:[{move: "bxc6"}]},
+			]}]},
+		]}]}
 	]}]},
 	{move: "Bb6",  freq:  77278,master:204,book:[declined,{move: "O-O"}]},
 	{move: "Nxb4", freq:  22500,book:[{move: "c3",replies:[
