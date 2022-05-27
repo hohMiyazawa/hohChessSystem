@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="johsvart.js"></script>
+		<script src="hohChess.js"></script>
+		<link rel="stylesheet" type="text/css" href="hohChess.css">
+		<style>
+#game{
+	margin-left: auto;
+	margin-right: auto;
+}
+		</style>
+	</head>
+	<body>
+		<div id="game"></div>
+		<script>
+const boardLocation = document.getElementById("game");
+hohChess(boardLocation,{
+	flip: true,
+	mode: "openingDrill",
+	isWhite: false,
+	book: blackBook
+});
+		</script>
+	</body>
+</html>
