@@ -1,18 +1,21 @@
 const framrykk = {move: "e6",replies:[
-	{move: "Bd3",   freq:    238587,book:[{move: "Bg6",replies:[
+	{move: "Bd3",   freq:    238587,book:[{move: "Bxd3",replies:[
+		{move: "Qxd3",   freq:    156466,book:[{move: "c5"}]},
+		{move: "cxd3",   freq:      5996},
+	]}/*{move: "Bg6",replies:[
 		{move: "O-O",  freq:    17452,book:[{move: "Ne7"}]},
 		{move: "Bxg6", freq:    14673,book:[{move: "hxg6"}]},
 		{move: "Nc3",  freq:     3894},
 		{move: "Bg5",  freq:     3570},
 		{move: "c3",   freq:     3024},
 		{move: "h4",   freq:     2604},
-	]}]},
+	]}*/]},
 	{move: "Be2",   freq:    218910,book:[{move: "Ne7",replies:[
 		{move: "O-O",   freq:     28966,book:[{move: "Nd7"}]},
 		{move: "Nb1d2", freq:      1435},
 		{move: "Be3",   freq:      1114},
 	]}]},
-	{move: "Nc3",   freq:     78379},
+	{move: "Nc3",   freq:     78379,book:[{move: "c5"}]},
 	{move: "c3",    freq:     62689},
 	{move: "c4",    freq:     55054},
 	{move: "h3",    freq:     30474},
@@ -66,7 +69,7 @@ const hovudcaro = {move: "d5",replies:[
 	{move: "e5",    freq:   3633647,book:[{move: "Bf5",replies:[
 		{move: "Nf3",  freq:    644644,book:[framrykk]},
 		{move: "Bd3",  freq:    524674},
-		{move: "h4",   freq:    324292},
+		{move: "h4",   freq:    324292,book:[{move: "h5"}]},
 		{move: "g4",   freq:    209325},
 		{move: "Nc3",  freq:    202640},
 		{move: "f4",   freq:    198058},
@@ -197,6 +200,15 @@ const kameleon = {move: "a6",replies:[
 	{move: "g3",    freq:    11246},
 ]}
 
+const tan = {move: "Nf6",replies:[
+	{move: "dxc6",   freq:    37711,book:[{move: "Nxc6"}]},
+	{move: "Nc3",    freq:    28960,book:[{move: "cxd5"}]},
+	{move: "Nf3",    freq:     4737},
+	{move: "Bf4",    freq:     1295},
+	{move: "e4",     freq:     1195},
+	{move: "e3",     freq:      868},
+]}
+
 const slav = {move: "d5",replies:[
 	{move: "Nc3",    freq:    3885550,book:[{move: "Nf6",replies:[
 		{move: "Nf3",   freq:   1295171,book:[kameleon]},
@@ -208,7 +220,7 @@ const slav = {move: "d5",replies:[
 		{move: "g3",    freq:     33658},
 	]}]},
 	{move: "Nf3",    freq:    1496470,book:[slavNf3]},
-	{move: "cxd5",   freq:     949110,book:[{move: "cxd5"}]},
+	{move: "cxd5",   freq:     949110,book:[tan,{move: "cxd5"}]},
 	{move: "e3",     freq:     571569,book:[{move: "Bf5"}]},
 ]}
 
