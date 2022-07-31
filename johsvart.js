@@ -81,7 +81,7 @@ const hovudcaro = {move: "d5",replies:[
 		{move: "c4",   freq:    980757,book:[{move: "Nf6"}]},
 		{move: "Nf3",  freq:    870130,book:[slagfisher]},
 		{move: "Bd3",  freq:    783221,book:[{move: "Nf6"}]},
-		{move: "Nc3",  freq:    366372},
+		{move: "Nc3",  freq:    366372,book:[{move: "Nc6"}]},
 		{move: "c3",   freq:    182882},
 	]}]},
 	{move: "Nc3",   freq:   2359549,book:[{move: "dxe4",replies:[
