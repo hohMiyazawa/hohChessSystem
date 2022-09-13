@@ -55,7 +55,23 @@ const djup = [
 const slagfisher = {move: "Bf5",replies:[
 	{move: "Bd3",   freq:    91990,book:[{move: "Bxd3",replies:[
 		{move: "Qxd3",   freq:   61722,book:[{move: "Nf6",replies:[
-			{move: "O-O",   freq:  8967,book:[{move: "e6"}]},
+			{move: "O-O",   freq:  8967,book:[{move: "e6",replies:[
+				{move: "Bg5",    freq:      5461,book:[{move: "Be7",replies:[
+					{move: "Nb1d2",  freq:      1125,book:[{move: "h6"}]},
+					{move: "Nc3",    freq:       639},
+					{move: "c3",     freq:       551},
+					{move: "Re1",    freq:       504},
+					{move: "Ne5",    freq:       503},
+					{move: "c4",     freq:       365},
+					{move: "Bxf6",   freq:       287},
+					{move: "Qb5+",   freq:       246},
+				]}]},
+				{move: "Re1",    freq:      3975},
+				{move: "c3",     freq:      2514},
+				{move: "c4",     freq:      1815},
+				{move: "Nc3",    freq:      1175},
+				{move: "Ne5",    freq:      1019},
+			]}]},
 		]}]},
 	]}]},
 	{move: "Nc3",   freq:    76756},
@@ -136,7 +152,20 @@ const caro_kann = {move: "c6",replies:[
 		{move: "d4",    freq:   356066},
 		{move: "d3",    freq:   109212},
 	]}]},
-	{move: "Bc4",   freq:   1045234},
+	{move: "Bc4",   freq:   1045234,book:[{move: "d5",replies:[
+		{move: "exd5",    freq:  1006308,book:[{move: "cxd5",replies:[
+			{move: "Bb3",     freq:   681576,book:[{move: "Bf5"}]},
+			{move: "Bb5+",    freq:   270583,book:[{move: "Bb5+",replies:[
+				{move: "Bxd7+",   freq:    79230,book:[{move: "Nxd7"}]},
+				{move: "Qe2",     freq:    18469},
+				{move: "Be2",     freq:     7090},
+				{move: "Nc3",     freq:     6968},
+				{move: "Bd3",     freq:     4175},
+				{move: "a4",      freq:     2840},
+			]}]},
+		]}]},
+		{move: "Bb3",     freq:    71075},
+	]}]},
 	{move: "f4",    freq:    812117},
 	{move: "d3",    freq:    684885},
 	{move: "c4",    freq:    593403,book:[panov]},//d5
