@@ -134,7 +134,9 @@ const caro_kann = {move: "c6",replies:[
 		{move: "exd5",  freq:   3222309,book:[{move: "cxd5",replies:[
 			{move: "d4",    freq:   2551509,book:[slagfisher]},
 			{move: "Bb5+",  freq:    169735},
-			{move: "Nc3",   freq:    147023},
+			{move: "Nc3",   freq:    147023,book:[{move: "Nf6",replies:[
+				{move: "h3",    freq:  1,book:[{move: "Bxf3"}]},
+			]}]},
 			{move: "c4",    freq:     91912},
 			{move: "Be2",   freq:     72887},
 		]}]},
